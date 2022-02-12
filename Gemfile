@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.4'
 
-gem 'bcrypt', '~> 3.1', '>= 3.1.16'
+gem 'devise'
 
 gem 'simple_form', '~> 5.1'
 
