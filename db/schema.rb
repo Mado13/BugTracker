@@ -10,16 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_12_115732) do
+ActiveRecord::Schema.define(version: 2022_02_13_123702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "project_manager_id_id"
+    t.bigint "lead_developer_id_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lead_developer_id_id"], name: "index_projects_on_lead_developer_id_id"
+    t.index ["project_manager_id_id"], name: "index_projects_on_project_manager_id_id"
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "lead_developer_id", null: false
+    t.bigint "project_id", null: false
+    t.string "priority"
+    t.string "status"
+    t.string "category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lead_developer_id"], name: "index_tickets_on_lead_developer_id"
+    t.index ["project_id"], name: "index_tickets_on_project_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,5 +63,9 @@ ActiveRecord::Schema.define(version: 2022_02_12_115732) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "projects", "users", column: "lead_developer_id_id"
+  add_foreign_key "projects", "users", column: "project_manager_id_id"
+  add_foreign_key "tickets", "projects"
+  add_foreign_key "tickets", "users", column: "lead_developer_id"
   add_foreign_key "users", "roles"
 end

@@ -1,0 +1,7 @@
+<ul>
+  <li class="nav-item"><%= link_to("Dashboard",dashboard_path, class:"nav-link") %></li>
+  <li class="nav-item"><%= link_to("Users",users_path, class:"nav-link") %></li>
+  <li class="nav-item"><%= link_to("Projects",user_projects_path(current_user), class:"nav-link") %></li>
+  <li class="nav-item"><%= link_to("Tickets",user_tickets_path(current_user), class:"nav-link") %></li>
+  <li class="nav-item"><%= link_to("My profile",user_path(current_user), class:"nav-link") %></li>
+  <li class="nav-item"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>

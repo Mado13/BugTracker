@@ -8,11 +8,9 @@
     <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
           <% if current_user.role.name = "Admin" %>
-            <li class="nav-item">
-                <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
-            </li>
-            <li><%= link_to "My Projects", user_projects_path, class: 'nav-link' %></li>
-
+            <%= render 'shared/admin_navbar' %>
+          <% else %>
+            <%= render 'shared/users_navbar' %>
           <% end %>
         <% else %>
             <li class="nav-item">
