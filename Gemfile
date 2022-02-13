@@ -15,6 +15,12 @@ gem 'pry-byebug', '~> 3.9'
 
 gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 
+gem 'font-awesome-sass', '~> 5.15.1'
+
+gem 'devise-i18n'
+
+gem 'devise-bootstrap-views', '~> 1.1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 # Use postgresql as the database for Active Record
