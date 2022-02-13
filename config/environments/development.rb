@@ -31,6 +31,10 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  ActionView::Base.field_error_proc = proc do |html_tag, _instance|
+    html_tag.html_safe
+  end
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
