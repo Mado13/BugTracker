@@ -1,0 +1,11 @@
+<%= @project.title %>
+
+<ul>
+  <% @project_tickets.each do |ticket| %>
+    <li><%= ticket.title %></li>
+  <% end %>
+</ul>
+
+<% @project_developer.each do |dev| %>
+  <%= dev.first_name %>
+<% end %>

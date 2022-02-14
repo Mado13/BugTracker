@@ -10,4 +10,8 @@ class Project < ApplicationRecord
   has_many :tickets
   has_many :ticket_assignments, through: :tickets
   has_many :developers, through: :ticket_assignments
+
+  def developers_uniq
+    developers.distinct
+  end
 end
