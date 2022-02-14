@@ -10,4 +10,12 @@ class User < ApplicationRecord
   def admin?
     role.name == 'Admin'
   end
+
+  def project_manager?
+    role.name == 'Project Manager'
+  end
+
+  def self.user_by_role(role)
+    Role.find_by(name: role).users
+  end
 end

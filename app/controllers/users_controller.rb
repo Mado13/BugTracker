@@ -7,9 +7,5 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  private
 
-  def admin?
-    current_user.role.name == 'Admin'
-  end
 end

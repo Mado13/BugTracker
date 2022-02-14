@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:role_id, :first_name, :last_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %I[role_id first_name last_name])
   end
 
   def after_sign_in_path_for(_resource)
@@ -15,5 +15,11 @@ class ApplicationController < ActionController::Base
 
   def set_users
     @users = User.all
+  end
+
+
+
+  def restrict_access
+    redirect to user_path(cuurent_user) unless current_user.admin? || current_user.project_manager?
   end
 end

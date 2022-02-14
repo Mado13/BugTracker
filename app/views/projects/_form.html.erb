@@ -1,0 +1,31 @@
+
+
+<% if flash[:alert] %>
+  <div>
+    <p align="center" class="flash-error"><%= flash[:alert] %></p>
+  </div>
+<% end %>
+
+<div class="form-container">
+  <%= simple_form_for project, url: "/users/#{current_user.id}/projects/#{params[:id]}" do |f| %>
+    <div class="mb-3">
+      <%= f.input :title, label: 'Enter project title: ', label_html: {class:"form-label"}, input_html: {value: @prev_params_title || project.title, class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= f.input :description, label: 'Enter project description: ', label_html: {class:"form-label"}, input_html: { value: @prev_params_description || project.description, class: "form-control" }  %>
+    </div>
+    <%if current_user.project_manager?%>
+      <%= f.hidden_field :project_manager_id_id %>
+    <%end%>
+    <%if current_user.admin?%>
+      <div class="mb-3">
+        <%= f.association :project_manager, collection: project_managers, label_method: :email, value_method: :id, label_html: {class:"form-label"}, input_html: {class: "form-select"}%>
+      </div>
+    <%end%>
+    <div class="mb-3">
+      <%= f.association :lead_developer, collection: lead_developers, label_method: :email, value_method: :id, label_html: {class:"form-label"}, input_html: {class: "form-select"}%>
+    </div>
+
+    <%= f.button :submit, class:"btn btn-success" %>
+  <% end %>
+</div>
