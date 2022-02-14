@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboard#index'
 
   resources :users do
-    resources :projects do
+    resources :projects, only: [:new, :create, :show, :index, :edit], shallow: true do
       resources :tickets, only: %I[show new edit]
     end
   end

@@ -1,1 +1,29 @@
 <h1>Tickets</h1>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Status</th>
+        <th scope="col">Category</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Lead Developer</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @assigns.each do |assign| %>
+        <tr>
+          <th scope="row"><%= link_to assign.ticket.id, ticket_path(assign.ticket.id) %></th>
+          <td><%= assign.ticket.title %></td>
+          <td><%= assign.ticket.status %></td>
+          <td><%= assign.ticket.category %></td>
+          <td><%= assign.ticket.priority %></td>
+          <td><%= assign.ticket.lead_developer.first_name %></td>
+          <td><%= assign.ticket.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

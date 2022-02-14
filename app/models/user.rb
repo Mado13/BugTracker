@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :role
+  has_many :projects
+
+  def admin?
+    role.name == 'Admin'
+  end
 end
