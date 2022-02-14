@@ -103,6 +103,11 @@ GEM
     diff-lcs (1.5.0)
     erubi (1.10.0)
     execjs (2.8.1)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     ffi (1.15.5)
     font-awesome-sass (5.15.1)
       sassc (>= 1.11)
@@ -271,6 +276,7 @@ DEPENDENCIES
   devise
   devise-bootstrap-views (~> 1.1)
   devise-i18n
+  factory_bot_rails (~> 6.2)
   font-awesome-sass (~> 5.15.1)
   jbuilder (~> 2.7)
   listen (~> 3.3)

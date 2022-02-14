@@ -16,6 +16,16 @@
 
   <body>
     <%= render 'shared/navbar' %>
+    <div id="welcome" class="d-flex justify-content-between">
+        <% if current_user %>
+        <p>
+          Welcome: <b><%="#{current_user.first_name}"%></b> | Logged in as: <b><%="#{current_user.role.name}"%></b>
+        </p>
+        <a id="contact-me-logged" href="mailto:demado@zohomail.com"><small><b>Contact the Developer</b></small></a>
+        <%else%>
+          <a id="contact-me-not-logged" href="mailto:demado@zohomail.com"><small><b>Contact the Developer</b></small></a>
+        <%end%>
+    </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

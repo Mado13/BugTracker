@@ -13,7 +13,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ms-auto text-center">
         <% if user_signed_in? %>
-          <% if current_user.role.name = "Admin" %>
+          <% if current_user.role.name == "Admin" %>
             <%= render 'shared/admin_navbar' %>
           <% else %>
             <%= render 'shared/users_navbar' %>
