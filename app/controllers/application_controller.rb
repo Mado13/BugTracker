@@ -17,7 +17,9 @@ class ApplicationController < ActionController::Base
     @users = User.all
   end
 
-
+  def set_roles
+    @roles = Roles.all
+  end
 
   def restrict_access
     redirect to user_path(cuurent_user) unless current_user.admin? || current_user.project_manager?

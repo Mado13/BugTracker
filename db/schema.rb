@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_14_104126) do
+ActiveRecord::Schema.define(version: 2022_02_15_083416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,12 @@ ActiveRecord::Schema.define(version: 2022_02_14_104126) do
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.bigint "project_manager_id_id"
-    t.bigint "lead_developer_id_id"
+    t.bigint "project_manager_id"
+    t.bigint "lead_developer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["lead_developer_id_id"], name: "index_projects_on_lead_developer_id_id"
-    t.index ["project_manager_id_id"], name: "index_projects_on_project_manager_id_id"
+    t.index ["lead_developer_id"], name: "index_projects_on_lead_developer_id"
+    t.index ["project_manager_id"], name: "index_projects_on_project_manager_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 2022_02_14_104126) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
-  add_foreign_key "projects", "users", column: "lead_developer_id_id"
-  add_foreign_key "projects", "users", column: "project_manager_id_id"
+  add_foreign_key "projects", "users", column: "lead_developer_id"
+  add_foreign_key "projects", "users", column: "project_manager_id"
   add_foreign_key "ticket_assignments", "tickets"
   add_foreign_key "ticket_assignments", "users", column: "developer_id"
   add_foreign_key "tickets", "projects"

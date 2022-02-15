@@ -18,4 +18,8 @@ class User < ApplicationRecord
   def self.user_by_role(role)
     Role.find_by(name: role).users
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

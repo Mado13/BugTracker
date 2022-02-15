@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/dashboard', to: 'dashboard#index'
 
-  resources :users do
-    resources :projects, only: [:new, :create, :show, :index, :edit], shallow: true do
+  resources :users, except: :create do
+    resources :projects, only: %I[new create show index edit], shallow: true do
       resources :tickets, only: %I[show new edit]
     end
   end
 
-  get "/users/:id/tickets", to: "tickets#index", as: "user_tickets"
+  post '/users/create', to: 'users#create', as: 'create_user'
+  get '/users/:id/tickets', to: 'tickets#index', as: 'user_tickets'
 end

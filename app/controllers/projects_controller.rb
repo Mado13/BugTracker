@@ -51,8 +51,8 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(
       :title,
       :description,
-      :project_manager_id_id,
-      :lead_developer_id_id
+      :project_manager_id,
+      :lead_developer_id
     )
   end
 end
