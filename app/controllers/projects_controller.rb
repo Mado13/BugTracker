@@ -3,12 +3,7 @@ class ProjectsController < ApplicationController
   before_action :decorate_current_user, only: %I[new index create]
 
   def new
-    if @user.admin?
-      @project = Project.new
-      @project_managers = User.users_by_role('Project Manager')
-    else
-      @project = Project.new(project_manager: @user)
-    end
+    @project = Project.new
     @lead_developers = User.users_by_role('Lead Developer')
   end
 
@@ -33,12 +28,10 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    user = current_user.decorate
-    if user.admin?
+    if @user.admin?
       @projects = Project.all
     else
-      user = User.find_by(id: params[:id])
-      @user_projects = Project
+      user = UserDecorator.new(User.find_by(id: params[:id]))
     end
   end
 

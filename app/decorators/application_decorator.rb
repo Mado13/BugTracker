@@ -5,7 +5,4 @@ class ApplicationDecorator < Draper::Decorator
   #   def percent_amount
   #     h.number_to_percentage object.amount, precision: 2
   #   end
-  def decorate_current_user
-    @user = UserDecorator.new(current_user)
-  end
 end

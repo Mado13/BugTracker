@@ -19,9 +19,16 @@
     </div>
     <%= @user.project_manager_hidden_fields %>
     <div class="mb-3">
-      <%= f.association :lead_developer, collection: @lead_developers, label_method: :email, value_method: :id %>
+      <%=
+          f.association :lead_developer,
+          collection: @lead_developers,
+          label_method: :email,
+          value_method: :id,
+          prompt: 'Please Select Lead Developer'
+      %>
     </div>
     <div class="mb-3">
+      <%= f.label :project_manager %>
       <%= @user.admin_form_select_tag %>
     </div>
 

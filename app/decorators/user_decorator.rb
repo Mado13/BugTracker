@@ -6,12 +6,17 @@ class UserDecorator < ApplicationDecorator
   include Draper::LazyHelpers
 
   def project_manager_hidden_fields
-    render inline: "<%= hidden_field_tag 'project[project_manager_id]', @user.id %>" if project_manager?
+    hidden_field_tag 'project[project_manager_id]', @user.id if project_manager?
   end
 
   def admin_form_select_tag
-    render html: "<label class='select required form-label' for='project_project_manager_id'></label>"
-    render inline: "<%= collection_select(:project, :project_manager_id, @project_managers, :id, :email, { class: 'form-control' }) %>" if admin?
+    if admin?
+      select_tag 'project[project_manager_id]',
+                  options_from_collection_for_select(User.users_by_role('Project Manager'),
+                  :id, :email),
+                  class: 'form-control',
+                  prompt: 'Select Project Manager'
+    end
   end
 
   def admin?
