@@ -1,19 +1,18 @@
 class UsersController < ApplicationController
-  before_action(only: %I[new edit]) { current_user.admin? }
 
   def index
   end
 
   def show
-    @user = current_user
+    @user = UserDecorator.new(current_user)
   end
 
   def new
-    @user = User.new
+    @user = UserDecorator.new(User.new)
   end
 
   def create
-    @user = User.create(user_params)
+    @user = UserDecorator.new(User.create(user_params))
     if @user.valid?
       flash.alert = "#{@user.full_name} has been successfully created as a #{@user.role.name} and email #{@user.email}."
       redirect_to new_user_path, flash: { alert: alert }

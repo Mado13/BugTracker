@@ -7,19 +7,7 @@ class User < ApplicationRecord
   belongs_to :role
   has_many :projects
 
-  def admin?
-    role.name == 'Admin'
-  end
-
-  def project_manager?
-    role.name == 'Project Manager'
-  end
-
-  def self.user_by_role(role)
+  def self.users_by_role(role)
     Role.find_by(name: role).users
-  end
-
-  def full_name
-    "#{first_name} #{last_name}"
   end
 end

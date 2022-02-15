@@ -21,7 +21,12 @@ class ApplicationController < ActionController::Base
     @roles = Roles.all
   end
 
+  def decorate_current_user
+    @user = UserDecorator.new(current_user)
+  end
+
   def restrict_access
-    redirect to user_path(cuurent_user) unless current_user.admin? || current_user.project_manager?
+    user = current_user.decorate
+    redirect to user_path(cuurent_user) unless user.admin? || user.project_manager?
   end
 end
