@@ -5,29 +5,34 @@
 <% end %>
 
 <div class="form-container">
-  <%= simple_form_for @user, url: create_user_path do |f| %>
+  <%= simple_form_for @user,
+      defaults: {
+                  input_html: { class: 'form-control'},
+                  label_html: { class: 'form-label'}
+                },
+      url: url do |f| %>
     <div class="row">
       <div class="mb-3 col">
-        <%= f.input :first_name, label: 'Enter first name: ', label_html: {class: "form-label"}, input_html: {class: "form-control"} %>
+        <%= f.input :first_name, label: 'Enter first name: ' %>
       </div>
       <div class="mb-3 col">
-        <%= f.input :last_name, label: 'Enter last name: ', label_html: {class: "form-label"}, input_html: {class: "form-control"} %>
+        <%= f.input :last_name, label: 'Enter last name: ' %>
       </div>
     </div>
     <div class="row">
       <div class="mb-3 col">
-        <%= f.input :role_id, label: 'Select role: ' ,collection: Role.all, label_html: {class: "form-label"}, input_html: {class: "form-select"} %>
+        <%= f.input :role_id, label: 'Select role: ' ,collection: Role.all %>
       </div>
       <div class="mb-3 col">
-        <%= f.input :email, label: 'Enter email: ', label_html: {class: "form-label"}, input_html: {class: "form-control"} %>
+        <%= f.input :email, label: 'Enter email: ' %>
       </div>
     </div>
     <div class="row">
       <div class="mb-3 col">
-        <%= f.input :password, label: 'Enter password: ', label_html: {class: "form-label"}, input_html: {class: "form-control"} %>
+        <%= f.input :password, label: 'Enter password: ' %>
       </div>
       <div class="mb-3 col">
-        <%= f.input :password_confirmation, label: 'Confirm password: ', label_html: {class: "form-label"}, input_html: {class: "form-control"} %>
+        <%= f.input :password_confirmation, label: 'Confirm password: ' %>
       </div>
     </div>
     <%= f.button :submit, class:"btn btn-success" %>
