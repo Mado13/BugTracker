@@ -4,7 +4,8 @@ class TicketsController < ApplicationController
       @tickets = Ticket.all
     else
       user = User.find_by(id: params[:id])
-      @assigns = TicketAssignment.joins(:ticket).where(developer_id: current_user.id).all
+      @tickets = Ticket.joins(:ticket_assignments)
+                       .where(ticket_assignments: { developer_id: user }).all
     end
   end
 

@@ -13,15 +13,15 @@
       </tr>
     </thead>
     <tbody>
-      <% @assigns.each do |assign| %>
+      <% @tickets.each do |ticket| %>
         <tr>
-          <th scope="row"><%= link_to assign.ticket.id, ticket_path(assign.ticket.id) %></th>
-          <td><%= assign.ticket.title %></td>
-          <td><%= assign.ticket.status %></td>
-          <td><%= assign.ticket.category %></td>
-          <td><%= assign.ticket.priority %></td>
-          <td><%= assign.ticket.lead_developer.first_name %></td>
-          <td><%= assign.ticket.description %></td>
+          <th scope="row"><%= link_to ticket.id, ticket_path(ticket.id) %></th>
+          <td><%= ticket.title %></td>
+          <td><%= ticket.status %></td>
+          <td><%= ticket.category %></td>
+          <td><%= ticket.priority %></td>
+          <td><%= ticket.lead_developer.first_name %></td>
+          <td><%= ticket.description %></td>
         </tr>
       <% end %>
     </tbody>
