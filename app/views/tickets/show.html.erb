@@ -1,2 +1,6 @@
-<h1>Ticket</h1>
+<h1>Ticket <%= @ticket.id %></h1>
 <%= @ticket.title %>
+<% @ticket.developers.each do |dev| %>
+  <%= dev.first_name  %>
+<% end %>
+<%= link_to "#{@ticket.project.title}", project_path(@ticket.project) %>
