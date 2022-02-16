@@ -19,7 +19,7 @@
     <div id="welcome" class="d-flex justify-content-between">
         <% if current_user %>
         <p>
-          Welcome: <b><%="#{current_user.first_name}"%></b> | Logged in as: <b><%="#{current_user.role.name}"%></b>
+          Welcome: <b><%="#{current_user.first_name}"%></b> | Logged in as: <b><%="#{current_user.role}"%></b>
         </p>
         <a id="contact-me-logged" href="mailto:demado@zohomail.com"><small><b>Contact the Developer</b></small></a>
         <%else%>

@@ -1,8 +1,13 @@
 class ApplicationDecorator < Draper::Decorator
-  # Define methods for all decorated objects.
-  # Helpers are accessed through `helpers` (aka `h`). For example:
-  #
-  #   def percent_amount
-  #     h.number_to_percentage object.amount, precision: 2
-  #   end
+  def admin?
+    object.role.name == 'Admin'
+  end
+
+  def project_manager?
+    object.role.name == 'Project Manager'
+  end
+
+  def lead_developer?
+    object.role.name == 'Lead Developer'
+  end
 end

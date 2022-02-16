@@ -1,0 +1,33 @@
+<% if flash[:alert] %>
+  <div>
+    <p align="center" class="flash-error"><%= flash[:alert] %></p>
+  </div>
+<% end %>
+
+<div class="form-container">
+  <%= simple_form_for @ticket,
+  defaults: {
+              input_html: { class: 'form-control'},
+              label_html: { class: 'form-label'}
+            },
+      url: new_project_ticket_path do |f| %>
+    <%= f.input :title, label: 'Title: ' %>
+    <%= f.input :description, label: 'Ticket Description: ' %>
+    <%=
+        f.association, :lead_developer,
+                       collection: @lead_developers,
+                       label_method: email,
+                       value_method: :id,
+                       prompt: 'Please Select Lead Developer For The Ticket'
+    %>
+    <div class="row">
+      <div class="mb-3 col">
+        <%= f.input :priority, collection: ['Low', 'Medium', 'High', 'Critical'] %>
+      </div>
+      <div class="mb-3 col"></div>
+      <div class="mb-3 col"></div>
+    </div>
+    <%= f.hidden_field :project_id %>
+    <%= f.button :submit, class:"btn btn-success" %>
+  <% end %>
+</div>

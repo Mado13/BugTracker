@@ -9,3 +9,5 @@
 <% @project_developer.each do |dev| %>
   <%= dev.first_name %>
 <% end %>
+
+<%= link_to 'Create New Ticket', new_project_ticket_path(@project) %>

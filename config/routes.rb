@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
+  post "projects/:id/tickets/new", to: "tickets#create"
   post '/users/create', to: 'users#create', as: 'create_user'
   get '/users/:id/tickets', to: 'tickets#index', as: 'user_tickets'
 end

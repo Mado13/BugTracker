@@ -1,0 +1,37 @@
+<% if flash[:alert] %>
+  <div>
+    <p align="center" class="flash-error"><%=flash[:alert] %></p>
+  </div>
+<% end %>
+
+<%= simple_form_for @ticket, url: new_project_ticket_path(@ticket.project) do |f| %>
+
+  <%= f.input :title, label: 'Title: ', label_html: {class:"form-label"} %>
+  <%= f.input :description, label: 'Description: ', label_html: {class:"form-label"}  %>
+  <% if @user.admin?  %>
+    <%= f.association :lead_developer, collection: @lead_developers, label_method: :email, value_method: :id, label_html: {class:"form-label"}, input_html: {class: "form-select"}%>
+  <% else %>
+    <%= f.hidden_field :lead_developer_id %>
+  <% end %>
+  <%= f.hidden_field :project_id %>
+
+  <div class="row">
+    <div class="mb-3 col">
+      <%= f.input :priority, label: 'Priority: ', collection: ["Low", "Medium", "High", "Critical"], label_html: {class:"form-label"}, input_html: {class: "form-select"} %>
+    </div>
+    <% if @ticket.new_record? %>
+      <%= f.hidden_field :status, label: 'Status: ', collection: ["Open", "In progress", "Closed"]  %>
+    <% else %>
+      <div class="mb-3 col">
+        <%= f.input :status, label: 'Status: ', collection: ["Open", "In progress", "Closed"], label_html: {class:"form-label"}, input_html: {class: "form-select"} %>
+      </div>
+    <% end %>
+    <div class="mb-3 col">
+      <%= f.input :category, label: 'Category: ', collection: ["Bug", "Potential Bug", "Enhancement", "Training"], label_html: {class:"form-label"}, input_html: {class: "form-select"} %>
+    </div>
+  </div>
+  <div class="mb-3 col">
+    <%= f.association :developers, label: "Assigned Developers", collection: User.users_by_role("Developer"), label_method: :email, value_method: :id, label_html: {class:"form-label"}, input_html: {class: "form-select"}%>
+  </div>
+  <%= f.button :submit, class:"btn btn-success" %>
+<% end %>

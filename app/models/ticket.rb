@@ -4,4 +4,8 @@ class Ticket < ApplicationRecord
   has_many :ticket_assignments
   has_many :developers, through: :ticket_assignments, foreign_key: :developer_id, validate: false
   has_one :project_manager, through: :project
+
+  def new
+    @ticket = Tikcet.new
+  end
 end

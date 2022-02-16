@@ -21,12 +21,14 @@ class ApplicationController < ActionController::Base
     @roles = Roles.all
   end
 
-  def decorate_current_user
-    @user = UserDecorator.new(current_user)
+  # Override Devise current_user to add decorator methods to current_user
+  def current_user
+    UserDecorator.decorate(super) unless super.nil?
   end
 
+  # Redirect unauthroized users back to profile page
   def restrict_access
-    user = current_user.decorate
-    redirect to user_path(cuurent_user) unless user.admin? || user.project_manager?
+    decorate_current_user
+    redirect to user_path(cuurent_user) unless current_user.admin? || current_user.project_manager?
   end
 end

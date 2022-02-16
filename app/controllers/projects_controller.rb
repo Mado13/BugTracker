@@ -1,16 +1,16 @@
 class ProjectsController < ApplicationController
   before_action :restrict_access, only: [:new]
-  before_action :decorate_current_user, only: %I[new index create]
 
   def new
     @project = Project.new
     @lead_developers = User.users_by_role('Lead Developer')
+    @user = UserDecorator.new(User.find_by(params[:id]))
   end
 
   def create
     # If user tries to modify its id in the inspect tool they'll see an error message, otherwise project will be created
-
-    if params[:project][:project_manager_id] == @user.id.to_s || @user.admin?
+    user = User.find_by(params[:id]).decorate
+    if params[:project][:project_manager_id] == user.id.to_s || user.admin?
       @project = Project.create(project_params)
       if @project.valid?
         redirect_to project_path(@project)
@@ -28,11 +28,16 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    if @user.admin?
+    if current_user.admin?
       @projects = Project.all
     else
-      user = UserDecorator.new(User.find_by(id: params[:id]))
+      user = User.find_by(params[:id]).decorate
+      binding.pry
+      @project = Project.joins(:tickets, :ticket_assignments)
+                        .where(ticket_assignments: { developer_id: user.id })
+                        .all
     end
+    binding.pry
   end
 
   def show

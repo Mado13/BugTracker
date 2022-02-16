@@ -17,7 +17,6 @@
     <div class="mb-3">
       <%= f.input :description, label: 'Enter project description: ' %>
     </div>
-    <%= @user.project_manager_hidden_fields %>
     <div class="mb-3">
       <%=
           f.association :lead_developer,
@@ -31,6 +30,7 @@
       <%= f.label :project_manager %>
       <%= @user.admin_form_select_tag %>
     </div>
+    <%= @user.project_manager_hidden_fields %>
 
     <%= f.button :submit, class:"btn btn-success" %>
   <% end %>
