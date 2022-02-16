@@ -8,17 +8,17 @@ class TicketsController < ApplicationController
         Ticket.all
       # All the tickets from all the projects that the user is assigned as project manager
       when 'Project Manager'
-        Ticket.joins(:project)
+        Ticket.includes(:project)
               .where(project: { project_manager_id: current_user })
               .all
       # All the tickets that the devloper has tickets assigned to him.
-      when 'Developer'
-        Ticket.joins(:ticket_assignments)
-              .where(ticket_assignments: { developer_id: current_user })
-              .all
-      # all the tickets from all the projects the the current user is assigned as lead developer
       when 'Lead Developer'
         Ticket.where(lead_developer_id: @user).all
+      # all the tickets from all the projects the the current user is assigned as lead developer
+      else
+        Ticket.includes(:ticket_assignments)
+              .where(ticket_assignments: { developer_id: current_user })
+              .all
       end
   end
 

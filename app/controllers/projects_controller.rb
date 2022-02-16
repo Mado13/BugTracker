@@ -28,16 +28,19 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    if current_user.admin?
-      @projects = Project.all
-    else
-      user = User.find_by(params[:id]).decorate
-      binding.pry
-      @project = Project.joins(:tickets, :ticket_assignments)
-                        .where(ticket_assignments: { developer_id: user.id })
-                        .all
-    end
-    binding.pry
+    @projects =
+      case current_user.role
+      when 'Admin'
+        Project.all
+      when 'Project Manager'
+        Project.where(project_manager_id: current_user)
+      when 'Lead Developer'
+        Project.where(lead_developer_id: current_user)
+      else
+        Project.includes(:tickets, :ticket_assignments)
+               .where(ticket_assignments: { developer_id: current_user })
+               .all
+      end
   end
 
   def show

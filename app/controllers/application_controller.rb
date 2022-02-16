@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
 
   # Redirect unauthroized users back to profile page
   def restrict_access
-    decorate_current_user
     redirect to user_path(cuurent_user) unless current_user.admin? || current_user.project_manager?
   end
 end
