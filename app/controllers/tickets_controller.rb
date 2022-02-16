@@ -1,9 +1,6 @@
 class TicketsController < ApplicationController
-
-
-
   def index
-    # Populating @tickets with the appropriate data according to user role.
+    # Populating @tickets with the relevant data according to user role.
     @tickets =
       case current_user.role
       when 'Admin'
