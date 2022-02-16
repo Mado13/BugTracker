@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
       when 'Project Manager'
         Project.where(project_manager_id: current_user)
       when 'Lead Developer'
-        Project.where(lead_developer_id: current_user)
+        Project.lead_developer_data(current_user.id)
       else
         Project.includes(:tickets, :ticket_assignments)
                .where(ticket_assignments: { developer_id: current_user })

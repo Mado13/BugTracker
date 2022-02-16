@@ -1,5 +1,7 @@
 class TicketsController < ApplicationController
 
+
+
   def index
     # Populating @tickets with the appropriate data according to user role.
     @tickets =
@@ -8,17 +10,13 @@ class TicketsController < ApplicationController
         Ticket.all
       # All the tickets from all the projects that the user is assigned as project manager
       when 'Project Manager'
-        Ticket.includes(:project)
-              .where(project: { project_manager_id: current_user })
-              .all
+        Ticket.project_manager_tickets(current_user.id)
       # All the tickets that the devloper has tickets assigned to him.
       when 'Lead Developer'
-        Ticket.where(lead_developer_id: @user).all
+        Ticket.lead_developer_data(current_user.id)
       # all the tickets from all the projects the the current user is assigned as lead developer
       else
-        Ticket.includes(:ticket_assignments)
-              .where(ticket_assignments: { developer_id: current_user })
-              .all
+        Ticket.developer_tickets(current_user.id)
       end
   end
 
