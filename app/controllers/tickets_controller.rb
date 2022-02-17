@@ -59,10 +59,12 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @ticket = Ticket.find_by(id: params[:id])
+    @ticket = Ticket.find(params[:id])
+    @new_comment = Comment.new(ticket: @ticket, user: current_user)
+    @ticket_comments = Comment.all.select { |c| c.ticket == @ticket }
   end
 
-   private
+  private
 
   def ticket_params
     params.require(:ticket).permit(
