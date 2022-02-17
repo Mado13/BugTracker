@@ -38,15 +38,15 @@ RSpec.describe Project, type: :model do
     )
   }
 
-  it "is valid with all attributes provided" do
+  it "Is valid with all attributes provided" do
     expect(project).to be_valid
   end
 
-  it "belongs to a Project Manager" do
+  it "Belongs to a Project Manager" do
     expect(project.project_manager).to eq(project_manager_user)
   end
 
-  it "belongs to a Lead Developer" do
+  it "Belongs to a Lead Developer" do
     expect(project.lead_developer).to eq(lead_developer_user)
   end
 

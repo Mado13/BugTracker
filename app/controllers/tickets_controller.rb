@@ -25,7 +25,7 @@ class TicketsController < ApplicationController
  def create
     # If user tries to modify its id or project_id in the inspect tool they'll see an error message, otherwise project will be created
 
-    if (params[:ticket][:lead_developer_id].to_i == current_user.id || @user.admin?) && params[:id] == ticket_params[:project_id]
+    if (params[:ticket][:lead_developer_id].to_i == current_user.id || current_user.admin?) && params[:id] == ticket_params[:project_id]
       @ticket = Ticket.create(ticket_params)
       if @ticket.valid?
         redirect_to ticket_path(@ticket)
