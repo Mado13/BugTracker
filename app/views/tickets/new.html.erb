@@ -1,3 +1,3 @@
 <h1>New Ticket for project # <%= "#{params[:project_id]}"%></h1>
 
-<%= render partial: "form" %>
+<%= render partial: "form", locals: {url: new_project_ticket_path(@ticket.project) } %>

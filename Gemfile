@@ -43,6 +43,8 @@ gem 'binding_of_caller', '~> 1.0'
 
 gem 'draper', '~> 4.0', '>= 4.0.2'
 
+gem 'pundit', '~> 2.2'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

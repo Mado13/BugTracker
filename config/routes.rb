@@ -12,9 +12,9 @@ Rails.application.routes.draw do
     end
   end
 
-  patch '/users/:id/projects/:id',  to: 'projects#update'
-  patch '/tickets/:id/edit',        to: 'tickets#update'
-  post '/projects/:id/tickets/new', to: 'tickets#create'
-  post '/users/create',             to: 'users#create',  as: 'create_user'
-  get '/users/:id/tickets',         to: 'tickets#index', as: 'user_tickets'
+  patch '/users/:id/projects/:id',    to: 'projects#update', as: 'update_project'
+  patch '/tickets/:id/edit',          to: 'tickets#update'
+  post  '/projects/:id/tickets/new',  to: 'tickets#create'
+  post  '/users/create',              to: 'users#create',  as: 'create_user'
+  get   '/users/:id/tickets',         to: 'tickets#index', as: 'user_tickets'
 end

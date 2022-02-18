@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_users
 
+  include Pundit
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   private
 
   def configure_permitted_parameters
@@ -26,8 +30,8 @@ class ApplicationController < ActionController::Base
     UserDecorator.decorate(super) unless super.nil?
   end
 
-  # Redirect unauthroized users back to profile page
-  def restrict_access
-    redirect to user_path(cuurent_user) unless current_user.admin? || current_user.project_manager?
+  def user_not_authorized
+    flash[:alert] = 'Not Authorized'
+    redirect_to(root_path)
   end
 end

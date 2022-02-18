@@ -4,11 +4,11 @@
   </div>
 <% end %>
 
-<%= simple_form_for @ticket, url: new_project_ticket_path(@ticket.project) do |f| %>
+<%= simple_form_for @ticket, url: url do |f| %>
 
   <%= f.input :title, label: 'Title: ', label_html: {class:"form-label"} %>
   <%= f.input :description, label: 'Description: ', label_html: {class:"form-label"}  %>
-  <% if @user.admin?  %>
+  <% if current_user.admin?  %>
     <%= f.association :lead_developer, collection: @lead_developers, label_method: :email, value_method: :id, label_html: {class:"form-label"}, input_html: {class: "form-select"}%>
   <% else %>
     <%= f.hidden_field :lead_developer_id %>

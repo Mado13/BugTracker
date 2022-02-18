@@ -22,6 +22,36 @@ class TicketsController < ApplicationController
     @ticket = TicketDecorator.new(Ticket.new(project_id: params[:project_id]))
   end
 
+  def edit
+    @ticket = Ticket.find(params[:id])
+    @lead_developers = User.users_by_role("Lead Developer")
+  end
+
+  def update
+    # If user tries to modify its id or project_id in the inspect tool they'll see an error message, otherwise project will be updated
+    @ticket = Ticket.find(params[:id])
+    if (params[:ticket][:lead_developer_id].to_i == current_user.id || current_user.role_name == "Admin") && @ticket.project_id == ticket_params[:project_id].to_i
+      @ticket.update(ticket_params)
+      if @ticket.valid?
+        redirect_to ticket_path(@ticket)
+      else
+        @lead_developers = User.users_by_role("Lead Developer")
+        render :edit
+      end
+    else
+      flash.now.alert = "Logged user or project id doesn't match the id of the user submitting the form or the expected project, please try again."
+      @ticket = Ticket.find(params[:id])
+      @lead_developers = User.users_by_role("Lead Developer")
+      if ticket_params
+        @prev_params_title = ticket_params[:title]
+        @prev_params_description = ticket_params[:description]
+      else
+        @prev_params_title = ""
+      end
+      render 'edit'
+    end
+  end
+
  def create
     # If user tries to modify its id or project_id in the inspect tool they'll see an error message, otherwise project will be created
 
@@ -35,7 +65,7 @@ class TicketsController < ApplicationController
       end
     else
       flash.now.alert = "Logged user or project id doesn't match the id of the user submitting the form or the expected project, please try again."
-      if current_user.role.name == "Lead Developer"
+      if current_user.role == "Lead Developer"
         @ticket = Ticket.new(
           title: params[:ticket][:title],
           description: params[:ticket][:description],
@@ -79,4 +109,10 @@ class TicketsController < ApplicationController
     )
   end
 
+  # Redirect unauthroized users back to profile page
+  def restrict_access
+    if current_user.admin? || (!current.user.admin? && params[:id] == current_user.id)
+      redirect to user_path(cuurent_user)
+    end
+  end
 end

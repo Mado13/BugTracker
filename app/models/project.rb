@@ -11,6 +11,13 @@ class Project < ApplicationRecord
   has_many :ticket_assignments, through: :tickets
   has_many :developers, through: :ticket_assignments
 
+  scope :developer_projects, lambda { |id|
+    includes(:ticket_assignments)
+      .where(ticket_assignments: { developer_id: id }).all
+  }
+
+  # Return the users the assigned to a project through a ticket assignment
+  # and remove duplications
   def developers_uniq
     developers.distinct
   end

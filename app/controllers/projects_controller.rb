@@ -1,53 +1,38 @@
 class ProjectsController < ApplicationController
-  before_action :restrict_access, only: [:new]
-
-  def new
-    @project = Project.new
-    @lead_developers = User.users_by_role('Lead Developer')
-    @user = UserDecorator.new(User.find_by(params[:id]))
-  end
-
-  def create
-    # If user tries to modify its id in the inspect tool they'll see an error message, otherwise project will be created
-    user = User.find_by(params[:id]).decorate
-    if params[:project][:project_manager_id] == user.id.to_s || user.admin?
-      @project = Project.create(project_params)
-      if @project.valid?
-        redirect_to project_path(@project)
-      else
-        @lead_developers = User.users_by_role("Lead Developer")
-        @project_managers = User.users_by_role("Project Manager")
-        render :new
-      end
-    else
-      flash.now.alert = "Logged user id doesn't match the id of the user submitting the form, please try again."
-      @project = Project.new(title: params[:project][:title], description: params[:project][:description], project_manager: current_user, lead_developer_id: params[:project][:lead_developer_id])
-      @lead_developers = User.users_by_role("Lead Developer")
-      render :new
-    end
-  end
+  before_action :set_lead_developers_collection, only: %I[new create edit]
+  before_action :authorize_project,              only: %I[new edit]
+  before_action :set_project,                    only: %I[show edit update]
 
   def index
-    @projects =
-      case current_user.role
-      when 'Admin'
-        Project.all
-      when 'Project Manager'
-        Project.where(project_manager_id: current_user)
-      when 'Lead Developer'
-        Project.lead_developer_data(current_user.id)
-      else
-        Project.includes(:tickets, :ticket_assignments)
-               .where(ticket_assignments: { developer_id: current_user })
-               .all
-      end
+    @projects = policy_scope(Project.all)
   end
 
   def show
-    @project = Project.find_by(id: params[:id])
-    @project_developer = @project.developers_uniq
-    @project_tickets = Ticket.joins(:project).where(project_id: @project)
+    @project_developers = @project.developers_uniq
+    @project_tickets = Ticket.includes(:project).where(project_id: @project)
   end
+
+  def new
+    @project = Project.new
+  end
+
+  def create
+    @project = Project.new(project_params).decorate
+    # Authorization is preformed after Project.new to prevent from the user
+    # to change their id in the inspect tool and create new projects.
+    authorize @project
+    @project.Mado.save_new_project
+  end
+
+  def edit
+  end
+
+  def update
+    authorize_project
+    @project.update_project
+  end
+
+
 
   private
 
@@ -58,5 +43,17 @@ class ProjectsController < ApplicationController
       :project_manager_id,
       :lead_developer_id
     )
+  end
+
+  def set_lead_developers_collection
+    @lead_developers = User.users_by_role('Lead Developer')
+  end
+
+  def authorize_project
+    authorize Project
+  end
+
+  def set_project
+    @project = Project.find(params[:id]).decorate
   end
 end
