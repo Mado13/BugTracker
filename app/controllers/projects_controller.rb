@@ -1,9 +1,10 @@
 class ProjectsController < ApplicationController
-  before_action :set_lead_developers_collection, only: %I[new create edit]
+  before_action :set_lead_developers_collection, only: %I[new create edit update]
   before_action :authorize_project,              only: %I[new edit]
   before_action :set_project,                    only: %I[show edit update]
 
   def index
+    # @project is being populated with the relevant data according to user role
     @projects = policy_scope(Project.all)
   end
 
@@ -17,22 +18,32 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params).decorate
-    # Authorization is preformed after Project.new to prevent from the user
+    @project = Project.new(project_params)
+    # Authorization is preformed after instantiation to prevent from the user
     # to change their id in the inspect tool and create new projects.
     authorize @project
-    @project.Mado.save_new_project
+    if @project.save
+      redirect_to project_path(@project)
+      flash[:alert] = "Project #{@project.title} Created Successfully"
+    else
+      @project ||= Project.new
+      render :new
+    end
   end
 
   def edit
   end
 
   def update
-    authorize_project
-    @project.update_project
+    authorize @project
+    if @project.update(project_params)
+      redirect_to project_path(@project)
+      flash[:alert] = "#{@project.title} Updated Successfully"
+    else
+      @project ||= Project.new
+      render :edit
+    end
   end
-
-
 
   private
 
@@ -45,15 +56,18 @@ class ProjectsController < ApplicationController
     )
   end
 
+  # populate @lead_developers for collection in the form.
   def set_lead_developers_collection
     @lead_developers = User.users_by_role('Lead Developer')
   end
 
+  # Authorize the instance of project to check if the user has
+  # the right privilges to create/edit the project.
   def authorize_project
     authorize Project
   end
 
   def set_project
-    @project = Project.find(params[:id]).decorate
+    @project = Project.find(params[:id])
   end
 end
