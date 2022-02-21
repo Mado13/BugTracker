@@ -13,30 +13,32 @@
                                     },
                           url: url do |f| %>
                               <div class="form-group row">
-                                <%= f.input :title, label: 'Title: ' %>
+                                <%= f.input :title, label: false, placeholder: 'Title' %>
                               </div>
                               <div class="form-group row">
-                                <%= f.input :description, label: 'Description: ' %>
+                                <%= f.input :description, label: false, placeholder: 'Title' %>
                               </div>
-                              <div class="form_group row">
-                                <%= f.input :priority, label: 'Priority: ', collection: ["Low", "Medium", "High", "Critical"] %>
+                              <div class="row d-flex">
+                                <div class="col">
+                                  <%= f.input :priority, label: false, prompt: 'Please Choose Priority', collection: ["Low", "Medium", "High", "Critical"] %>
+                                </div>
+                                <div class="col">
+                                  <%= f.input :category, label: false, prompt: 'Please Choose Category', collection: ["Bug", "Potential Bug", "Enhancement", "Training"] %>
+                                </div>
                               </div>
-                              <div class="form-group rwo">
+                              <div class="form-group row">
                                 <%= ticket_presenter.hidden_tag_status %>
                               </div>
                               <div class="form-group row">
                                 <%= ticket_presenter.lead_developer_select_tag %>
                               </div>
-                              <div class="form-group row">
-                                 <%= f.input :category, label: 'Category: ', collection: ["Bug", "Potential Bug", "Enhancement", "Training"] %>
-                              </div>
                               <div class="mb-3 col">
-                                <%= f.association :developers, label: "Assigned Developers", collection: User.users_by_role("Developer"), label_method: :email, value_method: :id %>
+                                <%= f.association :developers, label: "Choose assigned developers:", collection: User.users_by_role("Developer"), label_method: :email, value_method: :id %>
                               </div>
 
                                 <%= f.hidden_field :project_id %>
                               <div class="col-md-6 offset-md-4" style='padding-left: 24px;'>
-                                <%= f.submit 'Create', class: 'btn btn-primary btn-block', style: 'width: 100%;' %>
+                                <%= f.submit class: 'btn btn-primary btn-block', style: 'width: 100%;' %>
                               </div>
                       </div>
                       <% end %>

@@ -13,17 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @tickets.each do |ticket| %>
-        <tr>
-          <th scope="row"><%= link_to ticket.id, ticket_path(ticket.id) %></th>
-          <td><%= ticket.title %></td>
-          <td><%= ticket.status %></td>
-          <td><%= ticket.category %></td>
-          <td><%= ticket.priority %></td>
-          <td><%= ticket.lead_developer.first_name %></td>
-          <td><%= ticket.description %></td>
-        </tr>
-      <% end %>
+      <%= render @tickets %>
     </tbody>
   </table>
 </div>
