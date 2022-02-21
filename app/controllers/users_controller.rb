@@ -1,36 +1,39 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: %I[show edit update]
 
   def index
+    @users = User.all
   end
 
   def show
-    @user = UserDecorator.new(current_user)
   end
 
   def new
-    @user = UserDecorator.new(User.new)
+    @user = User.new
+    @user.decorate
   end
 
   def create
-    @user = UserDecorator.new(User.create(user_params))
-    if @user.valid?
-      flash.alert = "#{@user.full_name} has been successfully created as a #{@user.role.name} and email #{@user.email}."
-      redirect_to new_user_path, flash: { alert: alert }
+    @user = User.new(user_params)
+    @user.decorate
+    authorize @user
+    if @user.save
+      redirect_to user_path(@user)
+      flash[:notice] = "#{@user.full_name} has been successfully created as a #{@user.role} and email #{@user.email}."
     else
       render :new
     end
   end
 
   def edit
-    @user = User.find(params[:id])
+    authorize @user
   end
 
   def update
-    @user = User.find(params[:id])
-    @user.update(user_params)
-    if @user.valid?
-      flash.now.alert = "#{@user.full_name} has been successfully updated as a #{@user.role.name} and email #{@user.email}."
-      redirect_to new_user_path, flash: { alert: alert }
+    authorize @user
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+      flash[:notice] = "#{@user.full_name} has been successfully updated as a #{@user.role} and email #{@user.email}."
     else
       render :edit
     end
@@ -46,5 +49,9 @@ class UsersController < ApplicationController
       :email,
       :password
     )
+  end
+
+  def set_user
+    @user = User.find(params[:id]).decorate
   end
 end

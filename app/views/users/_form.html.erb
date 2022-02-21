@@ -1,9 +1,3 @@
-<% if flash[:alert] %>
-  <div>
-    <p align="center" class="flash-correct"><%= flash[:alert] %></p>
-  </div>
-<% end %>
-
 <div class="form-container">
   <%= simple_form_for @user,
       defaults: {
