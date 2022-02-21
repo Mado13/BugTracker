@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project_developers = @project.developers_uniq
+    @developer_tickets = Ticket.developer_tickets(current_user)
     @project_tickets = Ticket.includes(:project).where(project_id: @project)
   end
 
@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
     authorize @project
     if @project.save
       redirect_to project_path(@project)
-      flash[:alert] = "Project #{@project.title} Created Successfully"
+      flash[:notice] = "Project #{@project.title} Created Successfully"
     else
       @project ||= Project.new
       render :new
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
     authorize @project
     if @project.update(project_params)
       redirect_to project_path(@project)
-      flash[:alert] = "#{@project.title} Updated Successfully"
+      flash[:notice] = "#{@project.title} Updated Successfully"
     else
       @project ||= Project.new
       render :edit

@@ -1,6 +1,6 @@
 <tr>
   <th scope="row"><%= link_to project.title, project_path(project.id) %></th>
-  <td><%= project.lead_developer.full_name %></td>
-  <td><%= project.project_manager.full_name %></td>
+  <td><%= project.lead_developer.email %></td>
+  <td><%= project.project_manager.email %></td>
   <td><%= project.description %></td>
 </tr>

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %I[show edit update]
+  decorates_assigned :user
 
   def index
     @users = User.all
@@ -10,12 +11,10 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @user.decorate
   end
 
   def create
     @user = User.new(user_params)
-    @user.decorate
     authorize @user
     if @user.save
       redirect_to user_path(@user)
@@ -53,6 +52,5 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-    @user.decorate
   end
 end

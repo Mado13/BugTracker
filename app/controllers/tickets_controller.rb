@@ -17,7 +17,7 @@ class TicketsController < ApplicationController
     authorize @ticket
     if @ticket.update(ticket_params)
       redirect_to ticket_path(@ticket)
-      flash[:alert] = "Ticket #{@ticket.title} Updated!"
+      flash[:notice] = "Ticket #{@ticket.title} Updated!"
     else
       @ticket ||= Ticket.new
       render :new
@@ -29,7 +29,7 @@ class TicketsController < ApplicationController
     authorize @ticket
     if @ticket.save
       redirect_to ticket_path(@ticket)
-      flash[:alert] = "Ticket #{@ticket.title} Created Successfully"
+      flash[:notice] = "Ticket #{@ticket.title} Created Successfully"
     else
       @ticket ||= Ticket.new
       render :new
