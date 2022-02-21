@@ -52,6 +52,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id]).decorate
+    @user = User.find(params[:id])
+    @user.decorate
   end
 end
