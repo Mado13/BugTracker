@@ -1,0 +1,26 @@
+<div id="comments-section">
+    <h3 class="title"> Add a Comment </h3>
+    <%= simple_form_for @new_comment, url: ticket_comments_path(@ticket) do |f|%>
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :ticket_id %>
+      <div class="mb-3 col">
+        <%= f.input :message%>
+      </div>
+      <%= f.button :submit, "Leave a comment", class: "btn btn-success"%>
+    <% end %>
+
+
+    <h3 class="title"> Comments </h3>
+
+    <ul class="list-group">
+      <% @ticket_comments.reverse_each do |comment|%>
+        <div class="message-container">
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold"><%= comment.message %></div>
+              <small><%= "#{comment.user.full_name} (#{comment.user.role_name}) on #{comment.created_at.localtime})" %></small>
+            </div>
+          </li>
+        </div>
+      <% end %>
+    </ul>

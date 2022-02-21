@@ -1,5 +1,66 @@
 <h1 class="title">Ticket #<%= @ticket.id %></h1>
 
-<%= @ticket.description %>
+<small class="add-edit-record"><%=link_to edit_ticket_path(@ticket)%></small>
 
-<%= link_to 'Edit Ticket', edit_ticket_path(@ticket)  %>
+<div id="ticket-and-comments">
+  <div id="ticket-info-section" >
+    <table class="table">
+        <thead>
+          <th>Title</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Category</th>
+          <th>Project</th>
+        <thead>
+        <tbody>
+          </tr>
+            <td><%= @ticket.title %></td>
+            <td><%= @ticket.priority %></td>
+            <td><%= @ticket.status %></td>
+            <td><%= @ticket.category %></td>
+            <td><%= link_to @ticket.project.title, project_path(@ticket.project) %></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div><strong>Description:</strong></div>
+      <p id="ticket-description"><%= @ticket.description %></p>
+
+    <div id="assigned-developers">
+      <h3 class="title">Assigned Developers</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Email</th>
+        <thead>
+        <tbody>
+          <% @ticket.developers.each do |developer|%>
+          <tr>
+            <td><%= developer.first_name %></td>
+            <td><%= developer.last_name %></td>
+            <td><%= developer.email %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="ticket-details">
+      <h3 class="title">Ticket Details</h3>
+      <table class="table">
+        <thead>
+          <th>Submitter</th>
+          <th>Last update</th>
+          <th>Created on</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @ticket.lead_developer.email %></td>
+            <td><%= @ticket.updated_at.localtime %></td>
+            <td><%= @ticket.created_at.localtime %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
