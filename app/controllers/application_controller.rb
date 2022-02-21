@@ -34,6 +34,6 @@ class ApplicationController < ActionController::Base
   # alert on redirct for any of pundit failed authorization
   def user_not_authorized
     flash[:alert] = 'You Are Not Authorized To Preform That Action!'
-    redirect_to(request.refferer || root_path)
+    redirect_to(request.referer || root_path)
   end
 end
