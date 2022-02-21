@@ -46,6 +46,7 @@
   </table>
 </div>
 
+<<<<<<< HEAD
 <div class="data-container">
   <% if current_user.role != "Developer" %>
     <div id="tickets">
@@ -128,3 +129,7 @@
     </div>
   <% end %>
 </div>
+=======
+<%= link_to 'Create New Ticket', new_project_ticket_path(@project) %>
+<%= link_to 'Edit Project', edit_project_path(@project) %>
+>>>>>>> 8700767fefb24c42ff043f64b07bee4932a6df02

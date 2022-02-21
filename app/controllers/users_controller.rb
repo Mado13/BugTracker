@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %I[edit update]
+  before_action :set_user, only: %I[show edit update]
 
   def index
+    @users = User.all
   end
 
   def show
@@ -17,21 +18,22 @@ class UsersController < ApplicationController
     @user.decorate
     authorize @user
     if @user.save
-      flash[:notice] = "#{@user.full_name} has been successfully created as a #{@user.role.name} and email #{@user.email}."
-      redirect_to new_user_path
+      redirect_to user_path(@user)
+      flash[:notice] = "#{@user.full_name} has been successfully created as a #{@user.role} and email #{@user.email}."
     else
       render :new
     end
   end
 
   def edit
+    authorize @user
   end
 
   def update
     authorize @user
     if @user.update(user_params)
-      flash.now.alert = "#{@user.full_name} has been successfully updated as a #{@user.role.name} and email #{@user.email}."
-      redirect_to new_user_path
+      redirect_to user_path(@user)
+      flash[:notice] = "#{@user.full_name} has been successfully updated as a #{@user.role} and email #{@user.email}."
     else
       render :edit
     end
