@@ -1,3 +1,5 @@
 <h1 class="title">Ticket #<%= @ticket.id %></h1>
 
 <%= @ticket.description %>
+
+<%= link_to 'Edit Ticket', edit_ticket_path(@ticket)  %>

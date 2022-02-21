@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   before_action :set_ticket, only: %I[show edit update]
 
   def index
-    @tickets = TicketPolicy(Ticket.all)
+    @tickets = policy_scope(Ticket.all)
   end
 
   def new

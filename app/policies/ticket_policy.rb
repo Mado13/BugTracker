@@ -30,4 +30,12 @@ class TicketPolicy < ApplicationPolicy
       true
     end
   end
+
+  def edit?
+    create?
+  end
+
+  def update?
+    edit?
+  end
 end

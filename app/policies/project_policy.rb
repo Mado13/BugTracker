@@ -23,10 +23,10 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def edit?
-    new?
+    create?
   end
 
   def update?
-    create?
+    edit?
   end
 end
