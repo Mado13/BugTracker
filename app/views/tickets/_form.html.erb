@@ -1,37 +1,50 @@
-<% if flash[:alert] %>
-  <div>
-    <p align="center" class="flash-error"><%=flash[:alert] %></p>
-  </div>
-<% end %>
+<% present(@ticket, current_user) do |ticket_presenter| %>
+  <main class="ticket-form">
+      <div class="cotainer">
+          <div class="row justify-content-center">
+              <div class="col-md-8">
+                  <div class="card">
+                      <div class="card-header">Create New Ticket</div>
+                      <div class="card-body">
+                          <%= simple_form_for @ticket,
+                          defaults: {
+                                      input_html: { class: 'form-control'},
+                                      label_html: { class: 'col-md-4 col-form-label text-md-right'}
+                                    },
+                          url: url do |f| %>
+                              <div class="form-group row">
+                                <%= f.input :title, label: 'Title: ' %>
+                              </div>
+                              <div class="form-group row">
+                                <%= f.input :description, label: 'Description: ' %>
+                              </div>
+                              <div class="form_group row">
+                                <%= f.input :priority, label: 'Priority: ', collection: ["Low", "Medium", "High", "Critical"] %>
+                              </div>
+                              <div class="form-group rwo">
+                                <%= ticket_presenter.hidden_tag_status %>
+                              </div>
+                              <div class="form-group row">
+                                <%= ticket_presenter.lead_developer_select_tag %>
+                              </div>
+                              <div class="form-group row">
+                                 <%= f.input :category, label: 'Category: ', collection: ["Bug", "Potential Bug", "Enhancement", "Training"] %>
+                              </div>
+                              <div class="mb-3 col">
+                                <%= f.association :developers, label: "Assigned Developers", collection: User.users_by_role("Developer"), label_method: :email, value_method: :id %>
+                              </div>
 
-<%= simple_form_for @ticket, url: url do |f| %>
-
-  <%= f.input :title, label: 'Title: ', label_html: {class:"form-label"} %>
-  <%= f.input :description, label: 'Description: ', label_html: {class:"form-label"}  %>
-  <% if current_user.admin?  %>
-    <%= f.association :lead_developer, collection: @lead_developers, label_method: :email, value_method: :id, label_html: {class:"form-label"}, input_html: {class: "form-select"}%>
-  <% else %>
-    <%= f.hidden_field :lead_developer_id %>
-  <% end %>
-  <%= f.hidden_field :project_id %>
-
-  <div class="row">
-    <div class="mb-3 col">
-      <%= f.input :priority, label: 'Priority: ', collection: ["Low", "Medium", "High", "Critical"], label_html: {class:"form-label"}, input_html: {class: "form-select"} %>
-    </div>
-    <% if @ticket.new_record? %>
-      <%= f.hidden_field :status, label: 'Status: ', collection: ["Open", "In progress", "Closed"]  %>
-    <% else %>
-      <div class="mb-3 col">
-        <%= f.input :status, label: 'Status: ', collection: ["Open", "In progress", "Closed"], label_html: {class:"form-label"}, input_html: {class: "form-select"} %>
+                                <%= f.hidden_field :project_id %>
+                              <div class="col-md-6 offset-md-4" style='padding-left: 24px;'>
+                                <%= f.submit 'Create', class: 'btn btn-primary btn-block', style: 'width: 100%;' %>
+                              </div>
+                      </div>
+                      <% end %>
+                  </div>
+              </div>
+          </div>
       </div>
-    <% end %>
-    <div class="mb-3 col">
-      <%= f.input :category, label: 'Category: ', collection: ["Bug", "Potential Bug", "Enhancement", "Training"], label_html: {class:"form-label"}, input_html: {class: "form-select"} %>
-    </div>
-  </div>
-  <div class="mb-3 col">
-    <%= f.association :developers, label: "Assigned Developers", collection: User.users_by_role("Developer"), label_method: :email, value_method: :id, label_html: {class:"form-label"}, input_html: {class: "form-select"}%>
-  </div>
-  <%= f.button :submit, class:"btn btn-success" %>
+      </div>
+
+  </main>
 <% end %>

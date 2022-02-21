@@ -21,7 +21,7 @@
                               <div class="form-group row">
                                 <%=
                                     f.association :lead_developer,
-                                    collection: @lead_developers,
+                                    collection: User.users_by_role('Lead Developer'),
                                     label_method: :email,
                                     value_method: :id,
                                     prompt: 'Please Select Lead Developer',

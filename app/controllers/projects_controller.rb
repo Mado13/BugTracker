@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-  before_action :set_lead_developers_collection, only: %I[new create edit update]
   before_action :authorize_project,              only: %I[new edit]
   before_action :set_project,                    only: %I[show edit update]
 
@@ -54,11 +53,6 @@ class ProjectsController < ApplicationController
       :project_manager_id,
       :lead_developer_id
     )
-  end
-
-  # populate @lead_developers for collection in the form.
-  def set_lead_developers_collection
-    @lead_developers = User.users_by_role('Lead Developer')
   end
 
   # Authorize the instance of project to check if the user has

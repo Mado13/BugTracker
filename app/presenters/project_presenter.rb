@@ -1,8 +1,8 @@
 class ProjectPresenter
-  def initialize(project, template, current_user)
+  def initialize(project, current_user, template)
     @project = project
+    @user = UserDecorator.new(current_user)
     @template = template
-    @user = current_user.decorate
   end
 
   def h

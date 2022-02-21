@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # adding role_id, first_name, last_name to devise user registration
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %I[role_id first_name last_name])
   end
@@ -30,6 +31,7 @@ class ApplicationController < ActionController::Base
     UserDecorator.decorate(super) unless super.nil?
   end
 
+  # alert on redirct for any of pundit failed authorization
   def user_not_authorized
     flash[:alert] = 'You Are Not Authorized To Preform That Action!'
     redirect_to(request.refferer || root_path)

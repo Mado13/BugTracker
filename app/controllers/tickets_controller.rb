@@ -1,25 +1,13 @@
 class TicketsController < ApplicationController
+  before_action :set_lead_developers_collection
+
   def index
-    # Populating @tickets with the relevant data according to user role.
-    @tickets =
-      case current_user.role
-      when 'Admin'
-        Ticket.all
-      # All the tickets from all the projects that the user is assigned as project manager
-      when 'Project Manager'
-        Ticket.project_manager_tickets(current_user.id)
-      # All the tickets that the devloper has tickets assigned to him.
-      when 'Lead Developer'
-        Ticket.lead_developer_data(current_user.id)
-      # all the tickets from all the projects the the current user is assigned as lead developer
-      else
-        Ticket.developer_tickets(current_user.id)
-      end
+    @tickets = TicketPolicy(Ticket.all)
   end
 
   def new
     @lead_developers = User.users_by_role('Lead Developer')
-    @ticket = TicketDecorator.new(Ticket.new(project_id: params[:project_id]))
+    @ticket = Ticket.new(project_id: params[:project_id])
   end
 
   def edit
