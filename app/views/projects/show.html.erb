@@ -1,13 +1,130 @@
-<%= @project.title %>
+<h1 class="title">Project #<%=@project.id%> details</h1>
+<small class="add-edit-record"><%= link_to edit_project_path(@project) %></small>
 
-<ul>
-  <% @project_tickets.each do |ticket| %>
-    <li><%= ticket.title %></li>
-  <% end %>
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="fw-bold">Title:</div>
+    <%= @project.title %>
+  </li>
+    <li class="list-group-item">
+    <div class="fw-bold">Description:</div>
+    <%= @project.description %>
+  </li>
 </ul>
 
-<% @project_developers.each do |dev| %>
-  <%= dev.first_name %>
-<% end %>
+<div id="personell-in-charge">
+  <h3 class="title">Personnel in charge </h3>
+  <table class="table table-striped">
+    <thead>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Email</th>
+      <th>Role</th>
+    <thead>
+    <tbody>
+      <tr>
+        <td><%= @project.project_manager.first_name %></td>
+        <td><%= @project.project_manager.last_name %></td>
+        <td><%= @project.project_manager.email %></td>
+        <td><%= @project.project_manager.role %></td>
+      </tr>
+      <tr>
+        <td><%= @project.lead_developer.first_name %></td>
+        <td><%= @project.lead_developer.last_name %></td>
+        <td><%= @project.lead_developer.email %></td>
+        <td><%= @project.lead_developer.role %></td>
+      </tr>
+      <% @project_developers.each do |developer|%>
+      <tr>
+        <td><%= developer.first_name %></td>
+        <td><%= developer.last_name %></td>
+        <td><%= developer.email %></td>
+        <td><%= developer.role %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<%= link_to 'Create New Ticket', new_project_ticket_path(@project) %>
+<div class="data-container">
+  <% if current_user.role != "Developer" %>
+    <div id="tickets">
+      <h3 class="title">Tickets</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Id.</th>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Priority</th>
+
+          <th>Last update</th>
+        <thead>
+        <tbody>
+          <% @project_tickets.each do |ticket|%>
+          </tr>
+            <td><%= ticket.id %></td>
+            <td><%= ticket.title %></td>
+            <td><%= ticket.status %></td>
+            <td><%= ticket.priority %></td>
+
+            <td><%= ticket.updated_at.localtime %></td>
+            <td><%= link_to "See details", ticket_path(ticket)  %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <small class="add-edit-record"><%= link_to new_project_ticket_path(@ticket.project) %></small>
+    </div>
+
+    <div id="ticket-assignments">
+      <h3 class="title">Ticket Assignments</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Id.</th>
+          <th>Title</th>
+          <th>Assigned Developer</th>
+          <th>Created on</th>
+          <th>
+        <thead>
+        <tbody>
+          <% @project_ticket_assignments.each do |ticket_assignment|%>
+          </tr>
+            <td><%= ticket_assignment.ticket.id %></td>
+            <td><%= ticket_assignment.ticket_title %></td>
+            <td><%= ticket_assignment.developer %></td>
+            <td><%= ticket_assignment.created_at.localtime %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+  <% if current_user.role == "Developer" %>
+    <div id="my-tickets">
+      <h3 class="title">My tickets</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Id.</th>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Created on</th>
+          <th>Last update</th>
+        <thead>
+        <tbody>
+          <% @developer_tickets.each do |ticket|%>
+          </tr>
+            <td><%= ticket.id %></td>
+            <td><%= ticket.title %></td>
+            <td><%= ticket.status %></td>
+            <td><%= ticket.priority %></td>
+            <td><%= ticket.created_at.localtime %></td>
+            <td><%= ticket.updated_at.localtime %></td>
+            <td><%= link_to "See details", ticket_path(ticket)  %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

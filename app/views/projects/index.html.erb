@@ -1,3 +1,16 @@
 <h1>Projects</h1>
-<%= link_to "Create A Project", new_user_project_path(current_user) if current_user.admin? %>
-<%= render partial: @projects %>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Project Manager</th>
+        <th scope="col">Lead Developer</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @projects %>
+    </tbody>
+  </table>
+</div>

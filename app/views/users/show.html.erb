@@ -3,11 +3,12 @@
     <div class="d-flex align-items-center justify-content-center h-100">
       <div class="d-flex flex-column">
         <h1 class="title">My Profile</h1>
+        <%= link_to 'Edit Profile', edit_user_path(current_user) if current_user %>
         <ul id="user-profile" class="list-group">
-          <li class="list-group-item">First Name: <b><%= @user.first_name %></b></li>
-          <li class="list-group-item">Last Name: <b><%= @user.last_name %></b></li>
-          <li class="list-group-item">Role: <b><%= @user.role %></b></li>
-          <li class="list-group-item">Email: <b><%= @user.email %></b></li>
+          <li class="list-group-item">First Name: <b><%= current_user.first_name %></b></li>
+          <li class="list-group-item">Last Name: <b><%= current_user.last_name %></b></li>
+          <li class="list-group-item">Role: <b><%= current_user.role %></b></li>
+          <li class="list-group-item">Email: <b><%= current_user.email %></b></li>
         </ul>
       </div>
     </div>
