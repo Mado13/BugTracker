@@ -37,8 +37,8 @@ class TicketsController < ApplicationController
   end
 
   def show
-    # @new_comment = Comment.new(ticket: @ticket, user: current_user)
-    # @ticket_comments = Comment.all.select { |c| c.ticket == @ticket }
+    @new_comment = Comment.new(ticket: @ticket, user: current_user)
+    @ticket_comments = Comment.all.select { |c| c.ticket == @ticket }
   end
 
   private

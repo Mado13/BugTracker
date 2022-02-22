@@ -45,6 +45,8 @@ gem 'draper', '~> 4.0', '>= 4.0.2'
 
 gem 'pundit', '~> 2.2'
 
+gem 'hotwire-rails', '~> 0.1.3'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

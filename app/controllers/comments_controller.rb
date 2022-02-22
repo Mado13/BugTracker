@@ -1,5 +1,10 @@
 class CommentsController < ApplicationController
   def create
+  end
+
+
+
+  def create
     # If a new comment belongs to the logged in user and the expected ticket id, create the comment.
     # Otherwise, sent a flash message without deleting previous information that the user has filled out
     if comment_params[:user_id].to_i == current_user.id && params[:ticket_id] == comment_params[:ticket_id]
