@@ -1,6 +1,6 @@
 <h1 class="title">Ticket #<%= @ticket.id %></h1>
 
-<small class="add-edit-record"><%=link_to edit_ticket_path(@ticket)%></small>
+<small class="add-edit-record"><%=link_to 'Edit Ticket', edit_ticket_path(@ticket)%></small>
 
 <div id="ticket-and-comments">
   <div id="ticket-info-section" >
@@ -35,13 +35,7 @@
           <th>Email</th>
         <thead>
         <tbody>
-          <% @ticket.developers.each do |developer|%>
-          <tr>
-            <td><%= developer.first_name %></td>
-            <td><%= developer.last_name %></td>
-            <td><%= developer.email %></td>
-          </tr>
-          <% end %>
+          <%= render partial: 'developer', collection: @ticket.developers, as: :developer %>
         </tbody>
       </table>
     </div>

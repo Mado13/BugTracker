@@ -1,3 +1,22 @@
-// Place all the styles related to the tickets controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+div#ticket-and-comments {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+div#comments-section {
+  max-width: 500px;
+}
+
+p#ticket-description {
+  width: 600px;
+}
+
+div#tickets, div#ticket-assignments, div#my-tickets{
+  margin-top: 7%;
+}
+
+div#assigned-developers, div#ticket-details {
+  margin-top: 5%
+}

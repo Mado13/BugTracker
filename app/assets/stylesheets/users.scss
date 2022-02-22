@@ -2,7 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-#current-user-profile {
-  display: inline-block;
+div#current-user-profile div{
+  width: fit-content;
   margin: auto;
+}
+
+div ul#user-profile {
+  margin-top: 20%;
 }

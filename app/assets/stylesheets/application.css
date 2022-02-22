@@ -43,3 +43,97 @@ body{
   margin: 0;
   padding: 0;
 }
+
+
+div#welcome{
+  display: flex;
+  justify-content: space-between;
+}
+
+div.container {
+  background-color: white;
+  min-height: 720px;
+  padding-bottom: 2%;
+}
+
+a#contact-me-not-logged {
+  margin-left: 85%
+}
+
+a#contact-me-logged {
+  margin-right: 5%;
+}
+
+.title{
+  text-align: center;
+}
+
+table.table {
+  width: fit-content;
+  margin: auto;
+}
+
+small.add-edit-record {
+  text-align: center;
+  display: block;
+}
+
+p.flash-error {
+  color:darkred;
+}
+
+p.flash-correct {
+  color:darkgreen;
+}
+
+div.information-container {
+  animation: fadeIn 0.25s;
+  -webkit-animation: fadeIn 0.25s;
+  -moz-animation: fadeIn 0.25s;
+  -o-animation: fadeIn 0.25s;
+  -ms-animation: fadeIn 0.25s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

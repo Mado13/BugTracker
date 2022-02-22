@@ -13,31 +13,33 @@
     </li>
   </ul>
 
-  <div id="personell-in-charge">
-    <h3 class="title">Personnel in charge </h3>
-    <table class="table table-striped">
-      <thead>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Email</th>
-        <th>Role</th>
-      <thead>
-      <tbody>
-        <tr>
-          <td><%= @project.project_manager.first_name %></td>
-          <td><%= @project.project_manager.last_name %></td>
-          <td><%= @project.project_manager.email %></td>
-          <td><%= @project.project_manager.role.name %></td>
-        </tr>
-        <tr>
-          <td><%= @project.lead_developer.first_name %></td>
-          <td><%= @project.lead_developer.last_name %></td>
-          <td><%= @project.lead_developer.email %></td>
-          <td><%= @project.lead_developer.role.name %></td>
-        </tr>
-        <%= render partial: 'project_developers', collection: @project.developers.uniq, as: :developer %>
-      </tbody>
-    </table>
+  <div class="data-container">
+    <div id="personell-in-charge">
+      <h3 class="title">Personnel in charge </h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Email</th>
+          <th>Role</th>
+        <thead>
+        <tbody>
+          <tr>
+            <td><%= @project.project_manager.first_name %></td>
+            <td><%= @project.project_manager.last_name %></td>
+            <td><%= @project.project_manager.email %></td>
+            <td><%= @project.project_manager.role.name %></td>
+          </tr>
+          <tr>
+            <td><%= @project.lead_developer.first_name %></td>
+            <td><%= @project.lead_developer.last_name %></td>
+            <td><%= @project.lead_developer.email %></td>
+            <td><%= @project.lead_developer.role.name %></td>
+          </tr>
+          <%= render partial: 'project_developers', collection: @project.developers.uniq, as: :developer %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="data-container">
@@ -53,17 +55,7 @@
             <th>Last update</th>
           <thead>
           <tbody>
-            <% @project.tickets.each do |ticket|%>
-            </tr>
-              <td><%= ticket.id %></td>
-              <td><%= ticket.title %></td>
-              <td><%= ticket.status %></td>
-              <td><%= ticket.priority %></td>
-
-              <td><%= ticket.updated_at.localtime %></td>
-              <td><%= link_to "See details", ticket_path(ticket)  %></td>
-            </tr>
-            <% end %>
+            <%= render partial: 'project_ticket', collection: @project.tickets, as: :ticket %>
           </tbody>
         </table>
 

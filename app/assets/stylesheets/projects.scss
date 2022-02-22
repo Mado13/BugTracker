@@ -1,0 +1,9 @@
+div.data-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+div#tickets, div#ticket-assignments, div#my-tickets{
+  margin-top: 7%;
+}

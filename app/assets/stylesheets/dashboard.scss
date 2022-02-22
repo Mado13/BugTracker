@@ -1,3 +1,25 @@
 // Place all the styles related to the dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+h5.title {
+  margin-top: 30px
+}
+
+div.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+#tickets-by-status,
+#tickets-by-priority,
+#tickets-by-category,
+#projects-by-lead-developer,
+#projects-by-project-manager,
+#tickets-by-developer{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  text-align: center;
+}
