@@ -57,4 +57,28 @@ class ProjectPresenter
       h.render inline: "<td>#{project.lead_developer.email}</td>"
     end
   end
+
+  # If the current user i a developer it will render the user's assigned tickets
+  def developer_tickets
+    if @user.developer?
+      h.render inline:
+      '<div id="my-tickets">
+        <h3 class="title">My tickets</h3>
+        <table class="table table-striped">
+          <thead>
+            <th>Id.</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Created on</th>
+            <th>Last update</th>
+          <thead>
+          <tbody>
+            <!-- will render the partial _ticket.html.erb in projects folder -->
+            <%= render partial: \'ticket\', collection: @developer_tickets, as: :ticket %>
+          </tbody>
+        </table>
+      </div>'
+    end
+  end
 end

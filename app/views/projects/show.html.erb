@@ -1,3 +1,5 @@
+<!-- Start the page with calling present method that allowing calling method that
+are defined in '/app/presenters/project_presenter' -->
 <% present(@project, current_user) do |project_presenter| %>
   <h1 class="title">Project #<%=@project.id%> details</h1>
   <small class="add-edit-record"><%= link_to 'Edit Project', edit_project_path(@project) %></small>
@@ -58,7 +60,7 @@
             <%= render partial: 'project_ticket', collection: @project.tickets, as: :ticket %>
           </tbody>
         </table>
-        <%= link_to 'Create Ticket', new_project_ticket_path(@project) %>
+         <small class="add-edit-record"><%= link_to 'Create Ticket', new_project_ticket_path(@project) %></small>
       </div>
 
 
@@ -77,24 +79,6 @@
           </tbody>
         </table>
       </div>
-    <% if current_user.role == "Developer" %>
-      <div id="my-tickets">
-        <h3 class="title">My tickets</h3>
-        <table class="table table-striped">
-          <thead>
-            <th>Id.</th>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Priority</th>
-            <th>Created on</th>
-            <th>Last update</th>
-          <thead>
-          <tbody>
-            <!-- will render the partial _ticket.html.erb in projects folder -->
-            <%= render partial: 'ticket', collection: @developer_tickets, as: :ticket %>
-          </tbody>
-        </table>
-      </div>
-    <% end %>
+      <%= project_presenter.developer_tickets %>
   </div>
 <% end %>
