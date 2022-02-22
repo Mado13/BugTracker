@@ -1,9 +1,5 @@
 <tr>
-  <th scope="row"><%= link_to ticket.id, ticket_path(ticket.id) %></th>
-  <td><%= ticket.title %></td>
-  <td><%= ticket.status %></td>
-  <td><%= ticket.category %></td>
-  <td><%= ticket.priority %></td>
-  <td><%= ticket.lead_developer.first_name %></td>
-  <td><%= ticket.description %></td>
+  <td><%= ticket.title %> </td>
+  <td><%= ticket.project.title %> </td>
+  <td><%= link_to "View ticket", ticket_path(ticket) %> </td>
 </tr>

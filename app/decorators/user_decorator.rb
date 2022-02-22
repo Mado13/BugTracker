@@ -15,6 +15,10 @@ class UserDecorator < ApplicationDecorator
     object.role.name == 'Lead Developer'
   end
 
+  def developer?
+    object.role.name == 'Developer'
+  end
+
   def role
     object.role.name
   end

@@ -1,15 +1,14 @@
-<h1>Users</h1>
-<div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Role</th>
-        <th scope="col">Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render @users %>
-    </tbody>
-  </table>
-</div>
+<h1 class="title">Users</h1>
+
+<small class="add-edit-record"><%= link_to("Add new user",new_user_path) %></small>
+
+<table class="table table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Role</th>
+    <th>Email</th>
+  </thead>
+  <tbody>
+    <%= render @users %>
+  </tbody>
+</table>

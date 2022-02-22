@@ -1,16 +1,24 @@
-<h1>Projects</h1>
-<div class="container">
-  <table class="table">
+<!-- Start the page with calling present method that allowing calling method that
+are defined in '/app/presenters/project_presenter' -->
+<% present(@project, current_user) do |project_presenter| %>
+  <h1 class="title">Projects</h1>
+
+  <%= project_presenter.add_new_project %>
+
+
+  <table class="table table-striped">
     <thead>
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Project Manager</th>
-        <th scope="col">Lead Developer</th>
-        <th scope="col">Description</th>
-      </tr>
+      <th>Title</th>
+      <%= project_presenter.table_headers %>
     </thead>
     <tbody>
-      <%= render @projects %>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= project.title %> </td>
+            <%= project_presenter.table_data(project) %>
+          <td><%= link_to "View project", project_path(project) %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
-</div>
+<% end %>
