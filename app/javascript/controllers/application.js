@@ -1,4 +1,6 @@
 import { Application } from "@hotwired/stimulus"
+import "@fortawesome/fontawesome-free/js/all";
+import "@fortawesome/fontawesome-free/css/all";
 
 const application = Application.start()
 

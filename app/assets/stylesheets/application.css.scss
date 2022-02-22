@@ -12,12 +12,18 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
 
 @import "/app/assets/stylesheets/forms.scss";
 @import "~bootstrap/scss/bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+turbo-frame {
+  display: block;
+  border: 1px solid blue;
+}
 
 body{
     margin: 0;

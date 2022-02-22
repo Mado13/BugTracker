@@ -15,7 +15,7 @@ gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 
 gem 'rspec-rails', '~> 5.0.0'
 
-gem 'font-awesome-sass', '~> 5.15.1'
+gem 'font-awesome-sass'
 
 gem 'devise-i18n'
 

@@ -1,0 +1,12 @@
+<h1>New Comment</h1>
+
+<%= turbo_frame_tag 'new_comment', target: '_top' do %>
+  <%= form_with(model:[@comment.ticket, @comment],
+  data: { controller: 'reset_form', action: 'turbo:submit-end->reset_form#reset'}) do |form| %>
+    <div class="field">
+      <%= form.text_field :comment %>
+      <%= form.submit 'Comment' %>
+    </div>
+  <% end %>
+  <h1>Mado</h1>
+<% end %>
