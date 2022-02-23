@@ -11,9 +11,13 @@ gem 'better_errors', '~> 2.9', '>= 2.9.1'
 
 gem 'pry-byebug', '~> 3.9'
 
+gem 'sass-rails', '>= 6'
+
 gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 
 gem 'rspec-rails', '~> 5.0.0'
+
+gem 'font-awesome-sass'
 
 gem 'devise-i18n'
 

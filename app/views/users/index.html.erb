@@ -1,14 +1,41 @@
 <h1 class="title">Users</h1>
 
-<small class="add-edit-record"><%= link_to("Add new user",new_user_path) %></small>
+<small class="add-edit-record"><%= link_to new_user_path do %>
+                                 <i class="fas fa-user-plus fa-2x"></i>
+                               <% end %></small>
 
 <table class="table table-striped">
   <thead>
     <th>Name</th>
     <th>Role</th>
     <th>Email</th>
+    <th>Actions</th>
   </thead>
   <tbody>
     <%= render @users %>
   </tbody>
 </table>
+
+<body>
+
+
+			<table class="table table-stripped">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Role</th>
+						<th>Email</th>
+						<th>Actions</th>
+            <th>Mado</th>
+					</tr>
+				</thead>
+				<tbody>
+          <%= render @users %>
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+
+
+</body>
