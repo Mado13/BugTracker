@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     @comment.save!
 
     respond_to do |format|
-      format.turbo_stream
+      # format.turbo_stream
       format.html { redirect_to @ticket }
     end
   end
