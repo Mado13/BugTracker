@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/dashboard', to: 'dashboard#index'
+  get '/dashboard',                   to: 'dashboard#dashboard'
   patch '/users/:id/projects/:id',    to: 'projects#update', as: 'update_project'
   patch '/tickets/:id/edit',          to: 'tickets#update'
   post  '/projects/:id/tickets/new',  to: 'tickets#create'

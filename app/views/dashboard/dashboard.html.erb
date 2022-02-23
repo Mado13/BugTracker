@@ -1,0 +1,119 @@
+<h1 class="title"> Dashboard </h1>
+
+<div class="dashboard-container">
+
+  <div id="tickets-by-status">
+    <h5 class="title"> Number of tickets by status </h5>
+    <table class="table table-striped">
+      <thead>
+        <th>Status</th>
+        <th>#. of tickets</th>
+      </thead>
+      <tbody>
+        <%@tickets_by_status.each do |status|%>
+        <tr>
+          <td><%= status.status %></td>
+          <td><%= status.tickets_count %></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="tickets-by-priority">
+    <h5 class="title"> Number of tickets by priority </h5>
+    <table class="table table-striped">
+      <thead>
+        <th>Priority</th>
+        <th>#. of tickets</th>
+      </thead>
+      <tbody>
+        <%@tickets_by_priority.each do |priority|%>
+        <tr>
+          <td><%= priority.priority %></td>
+          <td><%= priority.tickets_count %></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="tickets-by-category">
+    <h5 class="title"> Number of tickets by category </h5>
+    <table class="table table-striped">
+      <thead>
+        <th>Category</th>
+        <th>#. of tickets</th>
+      </thead>
+      <tbody>
+        <%@tickets_by_category.each do |category|%>
+        <tr>
+          <td><%= category.category %></td>
+          <td><%= category.tickets_count %></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="projects-by-lead-developer">
+    <h5 class="title"> Number of received projects by Lead Developer </h5>
+    <table class="table table-striped">
+      <thead>
+        <th>Lead Developer</th>
+        <th>Email</th>
+        <th>#. of projects</th>
+      </thead>
+      <tbody>
+        <%@projects_by_lead_developer.each do |lead_developer|%>
+        <tr>
+          <td><%= lead_developer.email %></td>
+          <td><%= lead_developer.email %></td>
+          <td><%= lead_developer.projects_count %></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="projects-by-project-manager">
+    <h5 class="title"> Number of projects by Project Manager </h5>
+    <table class="table table-striped">
+      <thead>
+        <th>Project Manager</th>
+        <th>Email</th>
+        <th>#. of projects</th>
+      </thead>
+      <tbody>
+        <%@projects_by_project_manager.each do |project_manager|%>
+        <tr>
+          <td><%= project_manager.first_name %></td>
+          <td><%= project_manager.email %></td>
+          <td><%= project_manager.projects_count %></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="tickets-by-developer">
+    <h5 class="title"> Number of tickets by developer </h5>
+    <table class="table table-striped">
+      <thead>
+        <th>Developer</th>
+        <th>Email</th>
+        <th>#. of tickets</th>
+      </thead>
+      <tbody>
+        <%@tickets_by_developer.each do |developer|%>
+        <tr>
+          <td><%= developer.first_name %></td>
+          <td><%= developer.email %></td>
+          <td><%= developer.tickets_count %></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+
+</div>

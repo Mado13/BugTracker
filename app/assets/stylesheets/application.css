@@ -14,7 +14,6 @@
  *= require_self
  */
 
-@import "/app/assets/stylesheets/forms.scss";
 @import "~bootstrap/scss/bootstrap";
 
 turbo-frame {

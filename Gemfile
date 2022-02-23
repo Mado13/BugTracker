@@ -21,6 +21,8 @@ gem 'devise-i18n'
 
 gem 'devise-bootstrap-views', '~> 1.1'
 
+gem 'popper_js', '~> 2.9', '>= 2.9.3'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 # Use postgresql as the database for Active Record
@@ -46,6 +48,8 @@ gem 'draper', '~> 4.0', '>= 4.0.2'
 gem 'pundit', '~> 2.2'
 
 gem 'hotwire-rails', '~> 0.1.3'
+
+gem 'sprockets', '~> 4.0', '>= 4.0.2'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

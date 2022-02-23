@@ -5,7 +5,6 @@ class CommentsController < ApplicationController
     @comment = @ticket.comments.new
   end
 
-
   def create
     @comment = @ticket.comments.new(comment_params)
     @comment.user = current_user

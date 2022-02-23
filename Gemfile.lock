@@ -316,6 +316,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)
+  popper_js (~> 2.9, >= 2.9.3)
   pry-byebug (~> 3.9)
   puma (~> 5.0)
   pundit (~> 2.2)
@@ -327,6 +328,7 @@ DEPENDENCIES
   selenium-webdriver
   simple_form (~> 5.1)
   spring
+  sprockets (~> 4.0, >= 4.0.2)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)

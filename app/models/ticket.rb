@@ -21,4 +21,16 @@ class Ticket < ApplicationRecord
   def new
     @ticket = Tikcet.new
   end
+
+  def self.tickets_by_priority
+    select("tickets.priority, COUNT(tickets.priority) AS tickets_count").group("tickets.priority").order("COUNT(tickets.priority) DESC")
+  end
+
+  def self.tickets_by_category
+    select("tickets.category, COUNT(tickets.category) AS tickets_count").group("tickets.category").order("COUNT(tickets.category) DESC")
+  end
+
+  def self.tickets_by_status
+    select("tickets.status, COUNT(tickets.status) AS tickets_count").group("tickets.status").order("COUNT(tickets.status) DESC")
+  end
 end

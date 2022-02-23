@@ -1,34 +1,47 @@
-<div class="form-container">
-  <%= simple_form_for @user,
-      defaults: {
-                  input_html: { class: 'form-control'},
-                  label_html: { class: 'form-label'}
-                },
-      url: url do |f| %>
-    <div class="row">
-      <div class="mb-3 col">
-        <%= f.input :first_name, label: 'Enter first name: ' %>
+<main class="ticket-form">
+  <div class="cotainer">
+      <div class="row justify-content-center">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header">Create New Ticket</div>
+                  <div class="card-body">
+                      <%= simple_form_for @user,
+                      defaults: {
+                                  input_html: { class: 'form-control'},
+                                  label_html: { class: 'col-md-4 col-form-label text-md-right'}
+                                },
+                      url: url do |f| %>
+                          <div class="form-group row">
+                            <%= f.input :first_name, label: false, placeholder: 'First Name' %>
+                          </div>
+                          <div class="form-group row">
+                            <%= f.input :last_name, label: false, placeholder: 'Last Name' %>
+                          </div>
+                          <div class="row d-flex">
+                            <div class="col">
+                              <%= f.input :role_id, label: 'Select role: ' ,collection: Role.all %>
+                            </div>
+                            <div class="col">
+                              <%= f.input :email, label: 'Enter email: ' %>
+                            </div>
+                          </div>
+                          <div class="row d-flex">
+                            <div class="col">
+                              <%= f.input :password, label: 'Enter password: ' %>
+                            </div>
+                            <div class="col">
+                              <%= f.input :password_confirmation, label: 'Confirm password: ' %>
+                            </div>
+                          </div>
+                          <div class="col-md-6 offset-md-4" style='padding-left: 24px;'>
+                            <%= f.submit class: 'btn btn-primary btn-block', style: 'width: 100%;' %>
+                          </div>
+                  </div>
+                  <% end %>
+              </div>
+          </div>
       </div>
-      <div class="mb-3 col">
-        <%= f.input :last_name, label: 'Enter last name: ' %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="mb-3 col">
-        <%= f.input :role_id, label: 'Select role: ' ,collection: Role.all %>
-      </div>
-      <div class="mb-3 col">
-        <%= f.input :email, label: 'Enter email: ' %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="mb-3 col">
-        <%= f.input :password, label: 'Enter password: ' %>
-      </div>
-      <div class="mb-3 col">
-        <%= f.input :password_confirmation, label: 'Confirm password: ' %>
-      </div>
-    </div>
-    <%= f.button :submit, class:"btn btn-success" %>
-  <% end %>
-</div>
+  </div>
+  </div>
+
+</main>
