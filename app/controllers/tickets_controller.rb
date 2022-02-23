@@ -1,5 +1,4 @@
 class TicketsController < ApplicationController
-  before_action :authorize_ticket, only: %I[new edit]
   before_action :set_ticket, only: %I[show edit update]
 
   def index
@@ -7,10 +6,12 @@ class TicketsController < ApplicationController
   end
 
   def new
+    authorize Ticket
     @ticket = Ticket.new(project_id: params[:project_id])
   end
 
   def edit
+    authorize @ticket
   end
 
   def update
@@ -54,10 +55,6 @@ class TicketsController < ApplicationController
       :category,
       developer_ids: []
     )
-  end
-
-  def authorize_ticket
-    authorize Ticket
   end
 
   def set_ticket

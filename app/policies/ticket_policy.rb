@@ -36,6 +36,6 @@ class TicketPolicy < ApplicationPolicy
   end
 
   def update?
-    edit?
+    create?
   end
 end

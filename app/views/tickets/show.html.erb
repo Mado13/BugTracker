@@ -1,6 +1,10 @@
 <h1 class="title">Ticket #<%= @ticket.id %></h1>
 
-<small class="add-edit-record"><%=link_to 'Edit Ticket', edit_ticket_path(@ticket)%></small>
+<small class="add-edit-record">
+  <%=link_to edit_ticket_path(@ticket) do %>
+    <i class="far fa-edit fa-2x"></i>
+  <% end %>
+</small>
 
 <div id="ticket-and-comments">
   <div id="ticket-info-section" >
