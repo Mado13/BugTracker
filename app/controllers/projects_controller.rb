@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   def index
     # @project is being populated with the relevant data according to user role
-    @project = Project.find(31)
+    @project = Project.new
     @projects = policy_scope(Project.all)
   end
 
