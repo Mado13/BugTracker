@@ -19,18 +19,18 @@
                           </div>
                           <div class="row d-flex">
                             <div class="col">
-                              <%= f.input :role_id, label: 'Select role: ' ,collection: Role.all %>
+                              <%= f.input :role_id, label: false, prompt: 'Select Role' ,collection: Role.all %>
                             </div>
                             <div class="col">
-                              <%= f.input :email, label: 'Enter email: ' %>
+                              <%= f.input :email, label: false, placeholder: 'Email Address' %>
                             </div>
                           </div>
                           <div class="row d-flex">
                             <div class="col">
-                              <%= f.input :password, label: 'Enter password: ' %>
+                              <%= f.input :password, label: false, placeholder: 'Password' %>
                             </div>
                             <div class="col">
-                              <%= f.input :password_confirmation, label: 'Confirm password: ' %>
+                              <%= f.input :password_confirmation, label: false, placeholder: 'Confirm Password' %>
                             </div>
                           </div>
                           <div class="col-md-6 offset-md-4" style='padding-left: 24px;'>

@@ -2,5 +2,5 @@
   <td><%= assignment.ticket.id %></td>
   <td><%= assignment.ticket.title %></td>
   <td><%= assignment.developer.first_name %></td>
-  <td><%= assignment.created_at.localtime %></td>
+  <td><%= assignment.created_at.to_s(:short) %></td>
 </tr>
