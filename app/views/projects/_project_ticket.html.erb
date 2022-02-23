@@ -5,5 +5,9 @@
   <td><%= ticket.priority %></td>
 
   <td><%= ticket.updated_at.to_s(:short) %></td>
-  <td><%= link_to "See details", ticket_path(ticket)  %></td>
+  <td>
+    <%= link_to ticket_path(ticket) do %>
+      <i class="far fa-eye"></i>
+    <% end %>
+  </td>
 </tr>

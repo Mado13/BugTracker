@@ -16,7 +16,12 @@ are defined in '/app/presenters/project_presenter' -->
         <tr>
           <td><%= project.title %> </td>
             <%= project_presenter.table_data(project) %>
-          <td><%= link_to "View project", project_path(project) %></td>
+
+          <td>
+              <%= link_to project_path(project) do %>
+                <i class="far fa-eye"></i>
+              <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
