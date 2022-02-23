@@ -51,22 +51,17 @@
         <tbody>
           <tr>
             <td><%= @ticket.lead_developer.email %></td>
-            <td><%= @ticket.updated_at.localtime %></td>
-            <td><%= @ticket.created_at.localtime %></td>
+            <td><%= @ticket.updated_at.to_s(:short) %></td>
+            <td><%= @ticket.created_at.to_s(:short) %></td>
           </tr>
         </tbody>
       </table>
     </div>
 
-     <div id="comments">
-      <%= render @ticket.comments %>
-     </div>
-     <%= link_to 'New Msg', new_ticket_comment_path(@ticket) %>
-     <%= turbo_frame_tag 'new_comment', src: new_ticket_comment_path(@ticket), target: '_top' %>
-
-    <div id="comments-section">
+<%= turbo_frame_tag 'comments_form' do %>
+  <div id="comments-section">
       <h3 class="title"> Add a Comment </h3>
-      <%= simple_form_for @new_comment, url: ticket_comments_path(@ticket) do |f|%>
+      <%= simple_form_for @new_comment, url: ticket_comments_path(@ticket), format: :turbo_stream do |f|%>
         <%= f.hidden_field :user_id %>
         <%= f.hidden_field :ticket_id %>
         <div class="mb-3 col">
@@ -74,20 +69,10 @@
         </div>
         <%= f.button :submit, "Leave a comment", class: "btn btn-success"%>
       <% end %>
-
-
-    <h3 class="title"> Comments </h3>
-
-    <ul class="list-group">
-      <% @ticket_comments.reverse_each do |comment|%>
-        <div class="message-container">
-          <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-              <div class="fw-bold"><%= comment.comment %></div>
-              <small><%= "#{comment.user.email} (#{comment.user.role.name}) on #{comment.created_at.localtime})" %></small>
-            </div>
-          </li>
-        </div>
-      <% end %>
-    </ul>
   </div>
+<% end %>
+
+<%= turbo_stream_from "comments" %>
+<%= turbo_frame_tag "comments" do %>
+  <%= render @ticket.comments %>
+<% end %>

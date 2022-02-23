@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-
   let(:project_manager) {
     Role.create(name: 'Project Manager')
   }
@@ -55,5 +54,4 @@ RSpec.describe Project, type: :model do
     ticket2 = Ticket.create(title: 'Ticket2', lead_developer_id: lead_developer_user.id, project_id: project.id)
     expect(project.tickets).to eq([ticket1, ticket2])
   end
-
 end

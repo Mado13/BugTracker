@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to ticket_path(params[:ticket_id]) }
+      format.html { redirect_to @ticket }
     end
   end
 

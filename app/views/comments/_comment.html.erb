@@ -1,3 +1,5 @@
-<p id="<%= dom_id comment %>">
-  <%= comment.created_at.to_s(:short) %>: <%= comment.comment %>
-</p>
+<%= turbo_frame_tag dom_id(comment) do %>
+  <p id="<%= dom_id comment %>">
+    <%= comment.created_at.to_s(:short) %>: <%= comment.comment %>
+  </p>
+<% end %>

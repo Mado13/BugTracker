@@ -14,10 +14,10 @@ class TicketPresenter
   # as lead developer
   def lead_developer_select_tag
     if @user.admin? || @user.project_manager?
-       h.select_tag 'ticket[lead_developer_id]',
-                    h.options_from_collection_for_select(User.users_by_role('Lead Developer'), :id, :email),
-                    class: 'form-control col-md-4 col-form-label text-md-right',
-                    prompt: 'Select Lead Developer'
+      h.select_tag 'ticket[lead_developer_id]',
+                   h.options_from_collection_for_select(User.users_by_role('Lead Developer'), :id, :email),
+                   class: 'form-control col-md-4 col-form-label text-md-right',
+                   prompt: 'Select Lead Developer'
     elsif @user.lead_developer?
       h.hidden_field_tag 'ticket[lead_developer_id]', @user.id
     end
@@ -30,9 +30,9 @@ class TicketPresenter
       h.hidden_field_tag 'ticket[status]', 'Open'
     else
       h.select_tag 'ticket[status]',
-                   h.options_for_select(['open', 'close']),
+                   h.options_for_select(%w[open close]),
                    class: 'form-control col-md-4 col-form-label text-md-right',
-                    prompt: 'Ticket Status'
+                   prompt: 'Ticket Status'
     end
   end
 end
