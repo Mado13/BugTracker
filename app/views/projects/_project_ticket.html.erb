@@ -4,6 +4,6 @@
   <td><%= ticket.status %></td>
   <td><%= ticket.priority %></td>
 
-  <td><%= ticket.updated_at.localtime %></td>
+  <td><%= ticket.updated_at.to_s(:short) %></td>
   <td><%= link_to "See details", ticket_path(ticket)  %></td>
 </tr>
