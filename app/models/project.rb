@@ -11,6 +11,8 @@ class Project < ApplicationRecord
   has_many :ticket_assignments, through: :tickets
   has_many :developers, through: :ticket_assignments
 
+  # Scope that returns all the projects that a developer is assigned to
+  # through ticket assignments
   scope :developer_projects, lambda { |id|
     includes(:ticket_assignments)
       .where(ticket_assignments: { developer_id: id }).all
