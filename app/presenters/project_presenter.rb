@@ -5,6 +5,9 @@ class ProjectPresenter
     @template = template
   end
 
+  # Returns the view template and then creates a helper as h. when want to call
+  # Rails helpers on the view, and matching the pattern to the one of Draper
+  # with the decorators
   def h
     @template
   end

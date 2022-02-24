@@ -9,12 +9,18 @@ class CommentsController < ApplicationController
     @comment = @ticket.comments.new(comment_params)
     @comment.user = current_user
     @comment.ticket = @ticket
-    @comment.save!
 
     respond_to do |format|
-      # format.turbo_stream
-      format.html { redirect_to @ticket }
+      if @comment.save
+        format.turbo_stream
+        format.html { redirect_to @ticket }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: 'comments/form', locals: { comment: @comment })}
+      end
     end
+  end
+
+  def show
   end
 
 
