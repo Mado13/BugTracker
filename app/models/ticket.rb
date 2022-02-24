@@ -23,8 +23,12 @@ class Ticket < ApplicationRecord
   # scope to count all the tickets according to delimiter that will passed
   # as an argument
   scope :tickets_counts, lambda { |delimiter|
-    select("tickets.#{delimiter}")
-      .group("tickets.#{delimiter}")
+    # set query to be the value of ticket. the argument that is passed by
+    # calling the scope and than calls all SQL queries with query as the argument
+    query = "tickets.#{delimiter}"
+    select(query)
+      .group(query)
+      .order("#{query} DESC")
       .count
   }
 
