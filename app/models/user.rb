@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :ticket_assignments, foreign_key: :developer_id
 
+  # Scope to count all tickets assigned to a developer and show them on the dashboard
   scope :tickets_by_developer, lambda {
     joins(:ticket_assignments)
       .select('users.*, COUNT(ticket_assignments) AS tickets_count')
@@ -20,7 +21,9 @@ class User < ApplicationRecord
   # lead_developer_id/project_manager_id according to what is passed in.
   scope :custom_join, ->(role) { joins("INNER JOIN \"projects\" ON \"projects\".\"#{role}_id\" = \"users\".\"id\"") }
 
-  # Scope to count group and order all the projects assigned to a specific role
+  # Scope to count all projects assosciated with a specific role,
+  # call the custom_join scope with the role passed as an argument from
+  # the controller.
   scope :count_projects, lambda { |role|
     custom_join(role)
       .select('users.*, COUNT(projects) AS projects_count')
