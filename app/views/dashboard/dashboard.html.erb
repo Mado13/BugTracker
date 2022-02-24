@@ -10,12 +10,7 @@
         <th>#. of tickets</th>
       </thead>
       <tbody>
-        <%@tickets_by_status.each do |status|%>
-        <tr>
-          <td><%= status.status %></td>
-          <td><%= status.tickets_count %></td>
-        </tr>
-        <%end%>
+        <%= render partial: 'iterator', collection: @tickets_by_status, as: :count %>
       </tbody>
     </table>
   </div>
@@ -28,12 +23,7 @@
         <th>#. of tickets</th>
       </thead>
       <tbody>
-        <%@tickets_by_priority.each do |priority|%>
-        <tr>
-          <td><%= priority.priority %></td>
-          <td><%= priority.tickets_count %></td>
-        </tr>
-        <%end%>
+        <%= render partial: 'iterator', collection: @tickets_by_priority, as: :count %>
       </tbody>
     </table>
   </div>
@@ -46,12 +36,7 @@
         <th>#. of tickets</th>
       </thead>
       <tbody>
-        <%@tickets_by_category.each do |category|%>
-        <tr>
-          <td><%= category.category %></td>
-          <td><%= category.tickets_count %></td>
-        </tr>
-        <%end%>
+        <%= render partial: 'iterator', collection: @tickets_by_category, as: :count %>
       </tbody>
     </table>
   </div>
@@ -67,7 +52,7 @@
       <tbody>
         <%@projects_by_lead_developer.each do |lead_developer|%>
         <tr>
-          <td><%= lead_developer.email %></td>
+          <td><%= lead_developer.first_name %></td>
           <td><%= lead_developer.email %></td>
           <td><%= lead_developer.projects_count %></td>
         </tr>

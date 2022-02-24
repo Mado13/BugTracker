@@ -6,31 +6,29 @@ class Ticket < ApplicationRecord
   has_one :project_manager, through: :project
   has_many :comments
 
+  # scope for tickets by developer
   scope :developer_tickets, lambda { |id|
     includes(:ticket_assignments)
       .where(ticket_assignments: { developer_id: id })
       .all
   }
 
+  # scope for tickets by project manager
   scope :project_manager_tickets, lambda { |id|
     includes(:project)
       .where(project: { project_manager_id: id })
       .all
   }
 
+  # scope to count all the tickets according to delimiter that will passed
+  # as an argument
+  scope :tickets_counts, lambda { |delimiter|
+    select("tickets.#{delimiter}")
+      .group("tickets.#{delimiter}")
+      .count
+  }
+
   def new
-    @ticket = Tikcet.new
-  end
-
-  def self.tickets_by_priority
-    select("tickets.priority, COUNT(tickets.priority) AS tickets_count").group("tickets.priority").order("COUNT(tickets.priority) DESC")
-  end
-
-  def self.tickets_by_category
-    select("tickets.category, COUNT(tickets.category) AS tickets_count").group("tickets.category").order("COUNT(tickets.category) DESC")
-  end
-
-  def self.tickets_by_status
-    select("tickets.status, COUNT(tickets.status) AS tickets_count").group("tickets.status").order("COUNT(tickets.status) DESC")
+    @ticket = Ticket.new
   end
 end
