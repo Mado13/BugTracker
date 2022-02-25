@@ -1,7 +1,0 @@
-<tr>
-  <td><%= user.first_name %> <%= user.last_name %></td>
-  <td><%= user.role.name %></td>
-  <td><%= user.email %></td>
-  <td><%= link_to 'Edit User', edit_user_path(user) %></td>
-  <td></td>
-</tr>

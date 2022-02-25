@@ -65,22 +65,22 @@
 
 
 
-<div class="row d-flex justify-content-center comments-section">
-  <div class="comments-section">
-    <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-      <div class="card-body p-4">
-        <div class="form-outline mb-4">
-          <label class="form-label" for="addANote">+ Add a note</label>
-          <%= render partial: 'comments/form' %>
+  <div class="row d-flex justify-content-center comments-section">
+    <div class="comments-section">
+      <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+        <div class="card-body p-4">
+          <div class="form-outline mb-4">
+            <label class="form-label" for="addANote">+ Add a note</label>
+            <%= render partial: 'comments/form', locals: { url: ticket_comments_path(@ticket) } %>
+          </div>
+          <%= turbo_stream_from 'comments' %>
+          <%= turbo_frame_tag 'comments' do %>
+            <!-- Renders the partial views/comment/_comment.html.erb -->
+            <%= render partial: 'comments/comment', collection: @ticket_comments, locals: { comment: @comment, user: @user } %>
+          <% end %>
         </div>
-        <%= turbo_stream_from 'comments' %>
-        <%= turbo_frame_tag 'comments' do %>
-          <!-- Renders the partial views/comment/_comment.html.erb -->
-          <%= render @ticket_comments %>
-        <% end %>
       </div>
     </div>
   </div>
-</div>
 
 </div>

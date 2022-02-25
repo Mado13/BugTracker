@@ -1,10 +1,13 @@
 class CommentsController < ApplicationController
   before_action :set_ticket, only: %I[new create]
+  before_action :set_comment, only: %I[edit update]
 
   def new
     @comment = @ticket.comments.new
   end
 
+  # Using the respond to method because im using hotwire to make the comment section
+  # reactive, and therefore need a fallback redirection in case the turbo stream fails
   def create
     @comment = @ticket.comments.new(comment_params)
     @comment.user = current_user
@@ -15,7 +18,23 @@ class CommentsController < ApplicationController
         format.turbo_stream
         format.html { redirect_to @ticket }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: 'comments/form', locals: { comment: @comment })}
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: 'comments/form', locals: { url: ticket_comments_path(@ticket) })}
+      end
+    end
+  end
+
+  def edit
+  end
+
+  # Using the respond to method because im using hotwire to make the comment section
+  # reactive, and therefore need a fallback redirection in case the turbo stream fails
+  def update
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.turbo_stream
+        format.html { redirect_to @ticket }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: 'comments/form', locals: { url: comment_path(@comment) }) }
       end
     end
   end
@@ -54,5 +73,9 @@ class CommentsController < ApplicationController
 
   def set_ticket
     @ticket = Ticket.find(params[:ticket_id])
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 end

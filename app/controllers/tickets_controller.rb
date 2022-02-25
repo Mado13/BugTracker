@@ -38,7 +38,7 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @new_comment = Comment.new(ticket: @ticket, user: current_user)
+    @comment = Comment.new(ticket: @ticket, user: current_user)
     @ticket_comments = Comment.where(ticket_id: @ticket.id).order('created_at DESC')
   end
 
@@ -59,5 +59,9 @@ class TicketsController < ApplicationController
 
   def set_ticket
     @ticket = Ticket.find(params[:id])
+  end
+
+  def set_user
+    @user = current_user
   end
 end

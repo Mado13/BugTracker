@@ -6,15 +6,15 @@ Rails.application.routes.draw do
   resources :users, except: :create do
     resources :projects, only: %I[new create show index edit], shallow: true do
       resources :tickets, only: %I[show new edit] do
-        resources :comments, only: %I[create new]
+        resources :comments, only: %I[create new edit update destroy]
       end
     end
   end
 
-  get '/dashboard',                   to: 'dashboard#dashboard'
+  get   '/dashboard',                 to: 'dashboard#dashboard'
   patch '/users/:id/projects/:id',    to: 'projects#update', as: 'update_project'
   patch '/tickets/:id/edit',          to: 'tickets#update'
   post  '/projects/:id/tickets/new',  to: 'tickets#create'
-  post  '/users/create',              to: 'users#create',  as: 'create_user'
-  get   '/users/:id/tickets',         to: 'tickets#index', as: 'user_tickets'
+  post  '/users/create',              to: 'users#create',    as: 'create_user'
+  get   '/users/:id/tickets',         to: 'tickets#index',   as: 'user_tickets'
 end
