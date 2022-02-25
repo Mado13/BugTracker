@@ -10,11 +10,4 @@ const application = Application.start()
 application.debug = false
 window.Stimulus   = application
 
-$(document).on("turbolinks:load", () => {
-  console.log("turbolinks!");
-});
-$(document).on("turbo:load", () => {
-  console.log("turbo!");
-});
-
 export { application }

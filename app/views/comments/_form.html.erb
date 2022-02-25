@@ -2,7 +2,7 @@
   <%= f.hidden_field :user_id %>
   <%= f.hidden_field :ticket_id %>
   <div class="mb-3 col">
-    <%= f.input :comment%>
+    <%= f.input :comment, label: false %>
   </div>
     <%= f.button :submit, "Leave a comment", class: "btn btn-success"%>
 <% end %>
