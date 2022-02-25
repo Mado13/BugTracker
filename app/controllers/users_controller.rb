@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %I[show edit update]
+  before_action :set_user, only: %I[show edit update destroy]
   decorates_assigned :user
 
   def index
