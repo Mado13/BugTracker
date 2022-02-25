@@ -4,7 +4,6 @@
       <div class="ms-2 me-auto">
         <div class="fw-bold" id="<%= dom_id comment %>"><%= comment.comment %></div>
         <small><%= "#{comment.user.full_name} (#{comment.user.role_name}) on (#{comment.created_at.to_s(:short)})" %></small>
-        <%= link_do 'Edit', edit_comment_path(comment) %>
       </div>
     </li>
   </div>
