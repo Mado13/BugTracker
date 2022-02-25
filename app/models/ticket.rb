@@ -1,4 +1,9 @@
 class Ticket < ApplicationRecord
+  validates :title, presence: true, length: { in: 6..50 }
+  validates :priority, presence: true
+  validates :status, presence: true
+  validates :category, presence: true
+
   belongs_to :lead_developer, class_name: 'User'
   belongs_to :project
   has_many :ticket_assignments
