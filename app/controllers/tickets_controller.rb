@@ -39,7 +39,7 @@ class TicketsController < ApplicationController
 
   def show
     @comment = Comment.new(ticket: @ticket, user: current_user)
-    @ticket_comments = Comment.where(ticket_id: @ticket.id).order('created_at DESC')
+    @ticket_comments = Comment.where(ticket_id: @ticket.id).order('updated_at DESC')
   end
 
   private

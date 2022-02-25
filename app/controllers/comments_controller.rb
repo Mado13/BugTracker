@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_ticket, only: %I[new create]
-  before_action :set_comment, only: %I[edit update]
+  before_action :set_comment, only: %I[edit update destroy]
 
   def new
     @comment = @ticket.comments.new
@@ -40,6 +40,10 @@ class CommentsController < ApplicationController
   end
 
   def show
+  end
+
+  def destroy
+    @comment.destroy
   end
 
 
