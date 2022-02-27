@@ -13,6 +13,9 @@ class CommentPresenter
   end
 
   def edit_tags
-    h.render inline: '<%= @user.id == @comment.user_id %>'
+    if @user.id == @comment.user_id
+      h.render inline: "<%= link_to 'Edit', edit_comment_path(#{@comment.id}) %>
+                        <%= link_to 'Delete', comment_path(#{@comment.id}), method: :delete %>"
+    end
   end
 end

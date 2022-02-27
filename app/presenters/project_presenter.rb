@@ -39,7 +39,7 @@ class ProjectPresenter
 
   # Preventing from rendering a table content with the current_user information
   # if current user is project manager or lead developer
-  # using the cariable "res" in order to render multiple lines in the same condition
+  # using the variable "res" in order to render multiple lines in the same condition
   def table_headers
     if @user.developer? || @user.admin?
       res = h.render inline: '<th>Project Manager</th>'
@@ -53,6 +53,7 @@ class ProjectPresenter
 
   # According to table_headers method table_data is rendering only the relevant
   # data to match the headers.
+  # using the variable "res" in order to render multiple lines in the same condition
   def table_data(project)
     if @user.developer? || @user.admin?
       res = h.render inline: "<td>#{project.project_manager.email}</td>"
