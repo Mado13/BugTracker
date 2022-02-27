@@ -48,5 +48,4 @@ RSpec.describe TicketAssignment, type: :model do
   it "belongs to one developer" do
     expect(ticket_assignment.developer).to eq(developer_user)
   end
-
 end
