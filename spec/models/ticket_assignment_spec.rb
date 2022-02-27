@@ -30,7 +30,7 @@ RSpec.describe TicketAssignment, type: :model do
 
 
   let(:ticket) {
-    Ticket.create(title: "issue1", description: "hahahahahahahahah", lead_developer_id: lead_developer_user.id, project_id: project.id)
+    Ticket.create(title: "issue1", description: "hahahahahahahahah", lead_developer_id: lead_developer_user.id, project_id: project.id,status: 'Open', category: 'Bug', priority: 'Critical')
   }
 
   let(:ticket_assignment) {

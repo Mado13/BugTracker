@@ -50,8 +50,18 @@ RSpec.describe Project, type: :model do
   end
 
   it "Has many tickets" do
-    ticket1 = Ticket.create(title: 'Ticket1', lead_developer_id: lead_developer_user.id, project_id: project.id)
-    ticket2 = Ticket.create(title: 'Ticket2', lead_developer_id: lead_developer_user.id, project_id: project.id)
+    ticket1 = Ticket.create!(title: 'Ticket1',
+                             lead_developer_id: lead_developer_user.id,
+                             project_id: project.id,
+                             status: 'Open',
+                             category: 'Bug',
+                             priority: 'Critical')
+    ticket2 = Ticket.create!(title: 'Ticket2',
+                             lead_developer_id: lead_developer_user.id,
+                             project_id: project.id,
+                             status: 'Open',
+                             category: 'Bug',
+                             priority: 'Critical')
     expect(project.tickets).to eq([ticket1, ticket2])
   end
 end
