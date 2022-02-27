@@ -18,9 +18,8 @@ class TicketPolicy < ApplicationPolicy
     user.admin? || user.project_manager? || user.lead_developer?
   end
 
-  # check if the user is lead developer that he the lead developer assign to the ticket
-  # if the user is a project manager that he is the project's project manager
-  # or if the user is admin.
+  # Check if the uesr is the project's assigned lead_developer\project manager
+  # or the user is admin.
   def create?
     if user.lead_developer?
       record.lead_developer_id == user.id

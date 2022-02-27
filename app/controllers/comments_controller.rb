@@ -6,68 +6,56 @@ class CommentsController < ApplicationController
     @comment = @ticket.comments.new
   end
 
-  # Using the respond to method because im using hotwire to make the comment section
-  # reactive, and therefore need a fallback redirection in case the turbo stream fails
   def create
+    # Due to difficulty using current_user(Devise) and ActionCable(Hotwire)
+    # current_user was assigned to @user so it could pass in the view for the
+    # comment section create method.
+    @user = current_user
     @comment = @ticket.comments.new(comment_params)
     @comment.user = current_user
     @comment.ticket = @ticket
 
+    # Using the respond to method because the App is using hotwire to make the comment section
+    # reactive, and therefore needs a fallback redirection in case the turbo stream fails
     respond_to do |format|
       if @comment.save
         format.turbo_stream
         format.html { redirect_to @ticket }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: 'comments/form', locals: { url: ticket_comments_path(@ticket) })}
+        format.turbo_stream do
+          render turbo_stream: turbo_stream
+            .replace(@comment, partial: 'comments/form',
+                               locals: { url: ticket_comments_path(@ticket) })
+        end
       end
     end
   end
 
-  def edit
-  end
+  def edit; end
 
-  # Using the respond to method because im using hotwire to make the comment section
-  # reactive, and therefore need a fallback redirection in case the turbo stream fails
+  # Using the respond to method because the App is using hotwire to make the comment section
+  # reactive, and therefore needs a fallback redirection in case the turbo stream fails
   def update
     respond_to do |format|
       if @comment.update(comment_params)
         format.turbo_stream
         format.html { redirect_to @ticket }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: 'comments/form', locals: { url: comment_path(@comment) }) }
+        # Renders an error message using turbo without re rendering the page
+        format.turbo_stream do
+          render turbo_stream: turbo_stream
+            .replace(@comment, partial: 'comments/form',
+                               locals: { url: comment_path(@comment) })
+        end
       end
     end
   end
 
-  def show
-  end
+  def show; end
 
   def destroy
     @comment.destroy
   end
-
-
-
-  # def create
-  #   # If a new comment belongs to the logged in user and the expected ticket id, create the comment.
-  #   # Otherwise, sent a flash message without deleting previous information that the user has filled out
-  #   if comment_params[:user_id].to_i == current_user.id && params[:ticket_id] == comment_params[:ticket_id]
-  #     @new_comment = Comment.create(comment_params)
-  #     if @new_comment.valid?
-  #       redirect_to ticket_path(params[:ticket_id])
-  #     else
-  #       @ticket = Ticket.find(params[:ticket_id])
-  #       @ticket_comments = @ticket.comments
-  #       render "tickets/show"
-  #     end
-  #   else
-  #     flash.now.alert = "Unauthorised action, user id or ticket id are not the expected ones"
-  #     @ticket = Ticket.find(params[:ticket_id])
-  #     @new_comment = Comment.new(ticket: @ticket, user: current_user, message: params[:comment][:message])
-  #     @ticket_comments = @ticket.comments
-  #     render "tickets/show"
-  #   end
-  # end
 
   private
 

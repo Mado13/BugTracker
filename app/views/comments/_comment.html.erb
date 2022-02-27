@@ -1,4 +1,5 @@
 <%= turbo_frame_tag dom_id(comment) do %>
+  <% present(comment, @user) do |comment_presenter| %>
   <div class="card mb-4">
     <div class="card-body">
       <p><%= comment.comment %></p>
@@ -11,11 +12,14 @@
         <div class="d-flex flex-row align-items-center">
           <p class="small text-muted mb-0"><%= comment.updated_at.to_s(:short) %></p>
           <p class="small text-muted mb-0">
-            <%= link_to 'Edit', edit_comment_path(comment) %>
-            <%= link_to 'Delete', comment_path(comment), method: :delete %>
+             <% if user.id == comment.user_id %>
+                <%= link_to 'Edit', edit_comment_path(comment) %>
+                <%= link_to 'Delete', comment_path(comment), method: :delete %>
+             <% end %>
           </p>
         </div>
       </div>
     </div>
   </div>
+  <% end %>
 <% end %>

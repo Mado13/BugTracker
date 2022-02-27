@@ -30,7 +30,7 @@ class TicketsController < ApplicationController
     authorize @ticket
     if @ticket.save
       redirect_to ticket_path(@ticket)
-      flash[:notice] = "Ticket #{@ticket.title} Created Successfully"
+      flash[:notice] = "Ticket: #{@ticket.title} Created Successfully"
     else
       @ticket ||= Ticket.new
       render :new
@@ -38,6 +38,10 @@ class TicketsController < ApplicationController
   end
 
   def show
+    # Due to difficulty using current_user(Devise) and ActionCable(Hotwire)
+    # current_user was assigned to @user so it could pass in the view for the
+    # comment section create method.
+    @user = current_user
     @comment = Comment.new(ticket: @ticket, user: current_user)
     @ticket_comments = Comment.where(ticket_id: @ticket.id).order('updated_at DESC')
   end
@@ -59,9 +63,5 @@ class TicketsController < ApplicationController
 
   def set_ticket
     @ticket = Ticket.find(params[:id])
-  end
-
-  def set_user
-    @user = current_user
   end
 end
