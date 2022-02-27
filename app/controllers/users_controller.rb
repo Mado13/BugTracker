@@ -3,11 +3,10 @@ class UsersController < ApplicationController
   decorates_assigned :user
 
   def index
-    @users = User.all
+    @users = User.all.includes(:role)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @user = User.new

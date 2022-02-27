@@ -21,6 +21,8 @@ gem 'font-awesome-sass'
 
 gem 'devise-i18n'
 
+gem 'scout_apm'
+
 gem 'devise-bootstrap-views', '~> 1.1'
 
 gem 'popper_js', '~> 2.9', '>= 2.9.3'

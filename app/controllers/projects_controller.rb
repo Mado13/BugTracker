@@ -4,7 +4,9 @@ class ProjectsController < ApplicationController
   def index
     # @project is being populated with the relevant data according to user role
     @project = Project.new
-    @projects = policy_scope(Project.all)
+    # includes 'lead_developer' and 'project_manager' in order the reduce DB queries,
+    # both of them refer to Users table, but on different foreign keys
+    @projects = policy_scope(Project.all.includes(:lead_developer).includes(:project_manager))
   end
 
   def show

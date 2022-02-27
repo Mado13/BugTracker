@@ -1,8 +1,8 @@
 class TicketsController < ApplicationController
-  before_action :set_ticket, only: %I[show edit update]
+  before_action :set_ticket, only: %I[edit update]
 
   def index
-    @tickets = policy_scope(Ticket.all)
+    @tickets = policy_scope(Ticket.all.includes(:project))
   end
 
   def new
@@ -41,9 +41,12 @@ class TicketsController < ApplicationController
     # Due to difficulty using current_user(Devise) and ActionCable(Hotwire)
     # current_user was assigned to @user so it could pass in the view for the
     # comment section create method.
+    @ticket = Ticket.eager_load(:project, :lead_developer, :ticket_assignments)
+                    .find(params[:id])
     @user = current_user
     @comment = Comment.new(ticket: @ticket, user: current_user)
-    @ticket_comments = Comment.where(ticket_id: @ticket.id).order('updated_at DESC')
+    @ticket_comments = Comment.where(ticket_id: @ticket.id)
+                              .eager_load(:user)
   end
 
   private

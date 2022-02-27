@@ -34,7 +34,7 @@ class Ticket < ApplicationRecord
     select(query)
       .group(query)
       .order("#{query} DESC")
-      .count
+      .size
   }
 
   def new
