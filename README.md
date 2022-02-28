@@ -6,13 +6,12 @@ Now there is a way for you to follow your department bugs, open tickets, follow 
 on tickets, leave comments, manage department users and more to come...
 
  <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <br />
-    <br />
-    <a href="https://github.com/Mado13/TicketManager/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/Mado13/TicketManager/issues">Request Feature</a>
+  <br />
+  <br />
+  <br />
+  <a href="https://github.com/Mado13/TicketManager/issues">Report Bug</a>
+  ·
+  <a href="https://github.com/Mado13/TicketManager/issues">Request Feature</a>
 </p>
 
 ### Built With
@@ -27,6 +26,10 @@ on tickets, leave comments, manage department users and more to come...
 
 <!-- GETTING STARTED -->
 ## Getting Started
+
+You can see the project up and running on:
+
+[https://TicketManager.Heroku.com](https://ticket-manager-13.herokuapp.com/)
 
 To get a local copy up and running follow these simple example steps.
 
