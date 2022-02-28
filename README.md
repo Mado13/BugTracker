@@ -5,13 +5,22 @@ Welcome all IT teams out there for my Ticket Manager App,
 Now there is a way for you to follow your department bugs, open tickets, follow up
 on tickets, leave comments, manage department users and more to come...
 
-### Built With
+ <p align="center">
+    An awesome README template to jumpstart your projects!
+    <br />
+    <br />
+    <br />
+    <a href="https://github.com/Mado13/TicketManager/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Mado13/TicketManager/issues">Request Feature</a>
+</p>
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+### Built With
 
 * [Ruby On Rails 6](https://rubyonrails.org/)
 * [Ruby 2.7.4](https://www.ruby-lang.org/en/)
 * [Bootstrap](https://getbootstrap.com)
+* [HotWire](https://hotwired.dev/)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -36,19 +45,23 @@ You should have PostgreSQL installed on your local machine
 
  This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-3. Install Rails GEM's
+2. Install Rails GEM's
    ```sh
    bundle install
    ```
-4. To migrate and seed the database with mock data:
+3. To migrate and seed the database with mock data:
    ```sh
    rake db:create db:migrate db:seed
    ```
+4. Run the server locally from the App foler:
+  ```sh
+  bin/rails server
+  ```
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -71,7 +84,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Contact
 
-Matan Amidor
+Matan Amidor - demado@zohomail.com
 
 Project Link: [https://github.com/Mado13/TicketManager](https://github.com/Mado13/TicketManager)
 
