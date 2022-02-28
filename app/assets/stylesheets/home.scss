@@ -6,7 +6,16 @@ div.homepage {
   padding-top: 2.5%;
 }
 
-div#main-icon,
+div#bug-main-icon,
 h1.display-5, h6 {
   text-align: center;
+}
+
+div.form-container {
+  margin: auto;
+  margin-top: 5%;
+  max-width: 500px;
+}
+input.form-control {
+  max-width: 500px;
 }

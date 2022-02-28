@@ -1,24 +1,38 @@
-# README
+# Ticket Manager
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome all IT teams out there for my Ticket Manager App,
 
-Things you may want to cover:
+Now there is a way for you to follow your department bugs, open tickets, follow up
+on tickets, leave comments, manage department users and more to come...
 
-* Ruby version
+* Rails 6 + Ruby 2.7
 
-* System dependencies
+* PostgreSQL
 
-* Configuration
+* In order to run the app locally:
 
-* Database creation
+  1. clone the repository.
 
-* Database initialization
+  2. install postgresql on your local machine:
 
-* How to run the test suite
+    ```
+    brew install postgresql
+    ```
+  3. To get the application up and running, please make sure you are using Ruby 2.7.4, otherwise   go to the Gemfile and change it to the version you currently have. Then please run:
 
-* Services (job queues, cache servers, search engines, etc.)
+  ```
+  bundle install
+  ```
 
-* Deployment instructions
+  4. To migrate and seed the database with mock data, please run:
 
-* ...
+  ```
+  rake db:create db:migrate db:seed
+  ```
+
+  5. Run the server, Go to http://localhost:3000 and register your user.
+
+
+* The app is also Deployed and you can go to:
+
+  https://ticket-manager-13.herokuapp.com
