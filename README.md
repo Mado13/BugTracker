@@ -61,9 +61,9 @@ You should have PostgreSQL installed on your local machine
    rake db:create db:migrate db:seed
    ```
 4. Run the server locally from the App foler:
-  ```sh
-  bin/rails server
-  ```
+    ```sh
+    bin/rails server
+    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
