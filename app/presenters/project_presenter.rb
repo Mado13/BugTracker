@@ -30,11 +30,11 @@ class ProjectPresenter
 
   # Only admin or project manager can see add new project buttoin
   def add_new_project
-    return if @user.admin? || @user.project_manager?
-
-    h.render inline: '<small class="add-edit-record"><%= link_to new_user_project_path(current_user) do %>
-                      <i class="fas fa-plus-square fa-3x"></i>
-                      <% end %></small>'
+    if @user.admin? || @user.project_manager?
+      h.render inline: '<small class="add-edit-record"><%= link_to new_user_project_path(current_user) do %>
+                        <i class="fas fa-plus-square fa-3x"></i>
+                        <% end %></small>'
+    end
   end
 
   # Preventing from rendering a table content with the current_user information
