@@ -1,38 +1,78 @@
-# Ticket Manager
+### Ticket Manager
 
 Welcome all IT teams out there for my Ticket Manager App,
 
 Now there is a way for you to follow your department bugs, open tickets, follow up
 on tickets, leave comments, manage department users and more to come...
 
-* Rails 6 + Ruby 2.7
+### Built With
 
-* PostgreSQL
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-* In order to run the app locally:
+* [Ruby On Rails 6](https://rubyonrails.org/)
+* [Ruby 2.7.4](https://www.ruby-lang.org/en/)
+* [Bootstrap](https://getbootstrap.com)
 
-  1. clone the repository.
 
-  2. install postgresql on your local machine:
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-    ```
-    brew install postgresql
-    ```
-  3. To get the application up and running, please make sure you are using Ruby 2.7.4, otherwise   go to the Gemfile and change it to the version you currently have. Then please run:
+<!-- GETTING STARTED -->
+## Getting Started
 
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+please make sure you are using Ruby 2.7.4, otherwise   go to the Gemfile and change it to the version you currently have. Then please run:
+
+You should have PostgreSQL installed on your local machine
+
+* homebrew
+  ```sh
+  brew install postgresql
   ```
-  bundle install
-  ```
 
-  4. To migrate and seed the database with mock data, please run:
+### Installation
 
-  ```
-  rake db:create db:migrate db:seed
-  ```
+ This template doesn't rely on any external dependencies or services._
 
-  5. Run the server, Go to http://localhost:3000 and register your user.
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/your_username_/Project-Name.git
+   ```
+3. Install Rails GEM's
+   ```sh
+   bundle install
+   ```
+4. To migrate and seed the database with mock data:
+   ```sh
+   rake db:create db:migrate db:seed
+   ```
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
-* The app is also Deployed and you can go to:
+  <!-- CONTRIBUTING -->
+## Contributing
 
-  https://ticket-manager-13.herokuapp.com
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- CONTACT -->
+## Contact
+
+Matan Amidor
+
+Project Link: [https://github.com/Mado13/TicketManager](https://github.com/Mado13/TicketManager)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
